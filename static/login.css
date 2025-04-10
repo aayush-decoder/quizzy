@@ -1,5 +1,5 @@
 body{
-    background-image:image-set(url(images.avif));
+    background-image:image-set(url('../media/images.avif'));
     background-repeat: no-repeat;
     background-size:cover;
     /* background-color: black; */
