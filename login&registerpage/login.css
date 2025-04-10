@@ -1,4 +1,7 @@
 body{
+    background-image:image-set(url(images.avif));
+    background-repeat: no-repeat;
+    background-size:cover;
     /* background-color: black; */
     margin: 6px;
 }
@@ -6,16 +9,21 @@ body{
 h1{
     /* color: white; */
     text-align: center;
-    font-size: 50px;
+    font-size: 100px;
     margin-top: 20px;
+    color: rgb(255, 255, 255);
     /* animation: color-change 5s linear 2s infinite alternate-reverse; */
 }
 .navbar{
     display:flex;
     width: 100%;
     /* background-color: rgb(137, 137, 137); */
-    text-align: right;
+    text-align: center;
+    justify-content: space-around;
+    /* align- */
     a button{
+        width: 80px;
+        height: 30px;
         border-radius: 20px;
         margin-right:10px;
         margin-left:0px;
@@ -31,20 +39,21 @@ h1{
     color: rgb(255, 255, 255);
     transition: 0.5s;
 }
-@keyframes color-change {
+/* @keyframes color-change {
     0% { background-color: rgb(0, 0, 0); color: white;}
     25% { background-color: rgb(56, 56, 56);color: white; }
     50% { background-color: rgb(132, 132, 132); color: white;}
     75% { background-color: rgb(195, 195, 195); }
     100% { background-color: rgb(255, 255, 255); }
     
-}
+} */
 .login-form{
     display: block;
     margin: 0 auto;
-    width: 300px;
+    width: 400px;
     padding: 20px;    
-    border: 1px solid rgb(142, 142, 142);
+    border: 10px solid rgb(168, 167, 167);
+    border-style:double;
     border-radius: 10px;
     background-color: rgb(116, 115, 115);
     color: white;
@@ -54,7 +63,7 @@ h1{
         display: block;
         margin: 0 auto;
         margin-bottom: 10px;
-        width: 200px;
+        width: 300px;
         border: 1px solid white;
         border-radius: 5px;
         padding: 5px;
@@ -71,7 +80,7 @@ h1{
     }
 }
 .login-form form input:hover{
-    width: 250px;
+    width: 350px;
     background-color: rgb(0, 0, 0);
     color: rgb(255, 255, 255);
 }
