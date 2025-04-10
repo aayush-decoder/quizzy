@@ -3,27 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,height=device-height, initial-scale=1.0">
-    <title>Login_Page</title>
+    <title>Sign up Page</title>
     <link rel="stylesheet" href="login.css">
 </head>
 <body>
     <div class ="navbar">
-        <a href="signup.html"><button>Sign Up</button></a>
+        <a href="login.html"><button>Login</button></a>
         <a herf="./home.html"><button>Home</button></a>
     </div>
     <header>
-        <h1>Login Page</h1>
+        <h1>Sign Up Page</h1>
 
     </header>
     <div class="login-form">
         <form method = "POST">
+            <input type="email" placeholder="Email" name="email"><br>
             <input type="text" placeholder="Username" name="username"><br>
             <input type="password" placeholder="Password" name="password"><br>
+            <input type="password" placeholder="Confirm Password" name="confirm_password"><br>
             <input type="submit" value="Login"><br>
-           
+            <input type="reset" value="Reset"><br>
         </form>
-        <a href="register.html">Sign Up</a><br>
-        <a href="forgetpassword.html">Forget Password</a>
     </div>
 </body>
 </html>
