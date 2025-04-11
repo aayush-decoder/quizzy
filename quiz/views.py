@@ -5,3 +5,6 @@ def login_page(request):
 
 def register_page(request):
     return render(request, 'signup.html')
+
+def quiz(request):
+    return render(request, 'quiz.html')

@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static "quiz.css" %}">
+</head>
+<body>
+    <section>
+        <div class="quiz-box">
+            <div class="question-box">
+                hello
+            </div>
+            <div class="options-box">
+                <div class="option">op1</div>
+                <div class="option">op2</div>
+                <div class="option">op3</div>
+                <div class="option">op4</div>
+            </div>
+            <button class="btn next-btn" onclick="nextQuestion()">Next</button>
+        </div>
+    </section>
+
+
+<script>
+
+const questions = [
+    ["What is the capital of France?", "Berlin", "Madrid", "Paris", "Rome", 3],
+    ["Which planet is known as the Red Planet?", "Earth", "Mars", "Jupiter", "Venus", 2],
+    ["What is the largest ocean on Earth?", "Atlantic", "Indian", "Pacific", "Arctic", 3],
+    ["Who wrote 'Romeo and Juliet'?", "William Wordsworth", "William Shakespeare", "Charles Dickens", "Jane Austen", 2],
+    ["What is the chemical symbol for water?", "H2O", "O2", "CO2", "NaCl", 1]
+];
+  
+var currentQuestion = 1;
+
+function nextQuestion() {
+    $(".quiz-box").fadeOut(500, function () {
+
+        // at last question 
+        if (currentQuestion == questions.length) {
+            $('.next-btn').text('Finish');
+        }
+        else if (currentQuestion == questions.length + 1) {
+            alert("quiz finish. next logic goes here")
+        }
+
+        $(".question-box").html(questions[currentQuestion - 1][0]);
+        currentQuestion++;
+
+        $(".quiz-box").addClass("enlarge");
+        $(".quiz-box").fadeIn(250);
+
+        $(".quiz-box").on("animationend", function() {
+            $(".quiz-box").removeClass("enlarge");
+        });
+    });
+}
+
+
+$(document).ready(() => {
+    {% comment %} alert() {% endcomment %}
+})
+
+
+
+</script>
+
+
+</body>
+</html>
