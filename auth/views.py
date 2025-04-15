@@ -1,8 +1,10 @@
 from django.shortcuts import render
 
 # Create your views here.
-def login_view(request):
+
+
+def login_page(request):
     return render(request, 'login.html')
 
-def signup_view(request):
+def register_page(request):
     return render(request, 'signup.html')
