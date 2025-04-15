@@ -8,3 +8,6 @@ def register_page(request):
 
 def quiz(request):
     return render(request, 'quiz.html')
+
+def admin(request):
+    return render(request,"home.html")

@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Quiz Masters - Test Your Knowledge</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+     <style>
+        :root {
+            --primary-color: #25234e;
+            --secondary-color: #6d66d1;
+            --accent-color: #ff6584;
+            --light-color: #f8f9fa;
+            --dark-color: #32393f;
+        }
+        
+        body {
+           
+             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+        }
+        
+        .navbar {
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .nav-link {
+            font-weight: 600;
+            color: var(--dark-color);
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            font-weight: 600;
+            padding: 8px 20px;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            padding: 80px 0;
+            color: white;
+            border-radius: 0 0 30px 30px;
+        }
+        
+        .hero-heading {
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .hero-subheading {
+            font-weight: 300;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .hero-image {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .feature-icon {
+            background-color: var(--light-color);
+            color: var(--primary-color);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 20px rgba(108, 99, 255, 0.1);
+        }
+        
+        .feature-title {
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .quiz-card {
+            border: none;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .quiz-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+        }
+        
+        .quiz-image {
+            height: 180px;
+            object-fit: cover;
+        }
+        
+        .quiz-category {
+            background-color: var(--primary-color);
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 5px 10px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        
+        .quiz-difficulty {
+            font-size: 14px;
+            color: #6c757d;
+        }
+        
+        .quiz-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            font-size: 14px;
+            color: #6c757d;
+        }
+        
+        .cta-section {
+            background-color: var(--light-color);
+            padding: 80px 0;
+            border-radius: 30px;
+            margin: 50px 0;
+        }
+        
+        .testimonial-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            height: 100%;
+        }
+        
+        .testimonial-quote {
+            font-size: 18px;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+        
+        .testimonial-name {
+            font-weight: 600;
+            margin-bottom: 0;
+        }
+        
+        .testimonial-role {
+            font-size: 14px;
+            color: #6c757d;
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        .footer-heading {
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .footer-link {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            margin-bottom: 10px;
+            display: block;
+            transition: color 0.3s;
+        }
+        
+        .footer-link:hover {
+            color: white;
+        }
+        
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(143, 17, 17, 0.1);
+            color: white;
+            margin-right: 10px;
+            transition: background-color 0.3s;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--primary-color);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+        }
+    </style>
+
+    </head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-brain me-2"></i>
+                Quick Quizmasters
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Categories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Leaderboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
+                <div class="ms-3">
+                    <a href="{% url 'login' %}"><button class="btn btn-outline-primary me-2">Log In</button></a>
+                    <a href="{% url 'signup'%}"><button class="btn btn-primary">Sign Up</button></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="hero-heading display-4">Challenge Your Knowledge With Fun Quizzes</h1>
+                    <p class="hero-subheading lead">Discover thousands of quizzes on various topics, challenge friends, and prove your expertise in subjects you love.</p>
+                    <button class="btn btn-light btn-lg me-3">
+                        <i class="fas fa-play me-2"></i>
+                        Start Quiz
+                    </button>
+                    <button class="btn btn-outline-light btn-lg">
+                        <i class="fas fa-plus me-2"></i>
+                        Create Quiz
+                    </button>
+                </div>
+                <div class="col-lg-6 mt-5 mt-lg-0 text-center">
+                    <img src= "../media/home 4.jpeg" alt="Quiz illustration" class="hero-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row text-center mb-5">
+                <div class="col-lg-8 mx-auto">
+                    <h2 class="fw-bold mb-3">Why Choose Quick QuizMaster?</h2>
+                    <p class="text-muted">Our platform offers the best quiz experience with powerful features</p>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4 text-center">
+                    <div class="feature-icon mx-auto">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h4 class="feature-title">Diverse Topics</h4>
+                    <p class="text-muted">Explore quizzes across various categories, from science and history to pop culture and sports.</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="feature-icon mx-auto">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h4 class="feature-title">Social Learning</h4>
+                    <p class="text-muted">Challenge friends, join groups, and compete on global leaderboards to make learning fun.</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="feature-icon mx-auto">
+                        <i class="fas fa-medal"></i>
+                    </div>
+                    <h4 class="feature-title">Track Progress</h4>
+                    <p class="text-muted">Earn badges, unlock achievements, and monitor your improvement across different knowledge areas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Quizzes Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="fw-bold mb-0">Popular Quizzes</h2>
+                <a href="#" class="btn btn-outline-primary">View All</a>
+            </div>
+            <div class="row g-4">
+                <!-- Quiz Card 1 -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="quiz-card card h-100">
+                        <img src="../media/home 2.jpeg" class="quiz-image card-img-top" alt="Science quiz">
+                        <div class="card-body">
+                            <span class="quiz-category">Science</span>
+                            <h5 class="card-title">The Ultimate Space Quiz</h5>
+                            <p class="quiz-difficulty">
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="far fa-star text-warning"></i>
+                                <i class="far fa-star text-warning"></i>
+                                <span class="ms-2">Intermediate</span>
+                            </p>
+                            <p class="card-text text-muted">Test your knowledge about planets, stars, and the mysteries of our universe.</p>
+                            <div class="quiz-stats">
+                                <span><i class="fas fa-question-circle me-2"></i>20 Questions</span>
+                                <span><i class="fas fa-users me-2"></i>2.3k Attempts</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quiz Card 2 -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="quiz-card card h-100">
+                        <img src="../media/home 1.jpeg" class="quiz-image card-img-top" alt="History quiz">
+                        <div class="card-body">
+                            <span class="quiz-category">History</span>
+                            <h5 class="card-title">Ancient Civilizations</h5>
+                            <p class="quiz-difficulty">
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="far fa-star text-warning"></i>
+                                <span class="ms-2">Advanced</span>
+                            </p>
+                            <p class="card-text text-muted">Explore the wonders of ancient Egypt, Greece, Rome, and more civilizations.</p>
+                            <div class="quiz-stats">
+                                <span><i class="fas fa-question-circle me-2"></i>25 Questions</span>
+                                <span><i class="fas fa-users me-2"></i>1.8k Attempts</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quiz Card 3 -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="quiz-card card h-100">
+                        <img src="../media/home-3.jpeg" class="quiz-image card-img-top" alt="Entertainment quiz">
+                        <div class="card-body">
+                            <span class="quiz-category">Entertainment</span>
+                            <h5 class="card-title">Movie Trivia Challenge</h5>
+                            <p class="quiz-difficulty">
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="far fa-star text-warning"></i>
+                                <i class="far fa-star text-warning"></i>
+                                <i class="far fa-star text-warning"></i>
+                                <span class="ms-2">Beginner</span>
+                            </p>
+                            <p class="card-text text-muted">Test your knowledge of popular movies, actors, and famous film scenes.</p>
+                            <div class="quiz-stats">
+                                <span><i class="fas fa-question-circle me-2"></i>15 Questions</span>
+                                <span><i class="fas fa-users me-2"></i>3.5k Attempts</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quiz Card 4 -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="quiz-card card h-100">
+                        <img src="../media/home 7.jpeg" class="quiz-image card-img-top" alt="Technology quiz">
+                        <div class="card-body">
+                            <span class="quiz-category">Technology</span>
+                            <h5 class="card-title">Digital World Quiz</h5>
+                            <p class="quiz-difficulty">
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star-half-alt text-warning"></i>
+                                <i class="far fa-star text-warning"></i>
+                                <span class="ms-2">Intermediate</span>
+                            </p>
+                            <p class="card-text text-muted">Challenge yourself with questions about modern tech, gadgets, and innovations.</p>
+                            <div class="quiz-stats">
+                                <span><i class="fas fa-question-circle me-2"></i>18 Questions</span>
+                                <span><i class="fas fa-users me-2"></i>2.1k Attempts</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Explore Quiz Categories</h2>
+                <p class="text-muted">Find quizzes on topics that interest you the most</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="card text-center h-100 border-0 shadow-sm">
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <i class="fas fa-flask fa-2x text-primary"></i>
+                            </div>
+                            <h5 class="card-title">Science</h5>
+                            <p class="card-text small text-muted">450+ Quizzes</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="card text-center h-100 border-0 shadow-sm">
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <i class="fas fa-landmark fa-2x text-primary"></i>
+                            </div>
+                            <h5 class="card-title">History</h5>
+                            <p class="card-text small text-muted">380+ Quizzes</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="card text-center h-100 border-0 shadow-sm">
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <i class="fas fa-film fa-2x text-primary"></i>
+                            </div>
+                            <h5 class="card-title">Movies</h5>
+                            <p class="card-text small text-muted">520+ Quizzes</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="card text-center h-100 border-0 shadow-sm">
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <i class="fas fa-laptop-code fa-2x text-primary"></i>
+                            </div>
+                            <h5 class="card-title">Technology</h5>
+                            <p class="card-text small text-muted">310+ Quizzes</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="card text-center h-100 border-0 shadow-sm">
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <i class="fas fa-futbol fa-2x text-primary"></i>
+                            </div>
+                            <h5 class="card-title">Sports</h5>
+                            <p class="card-text small text-muted">280+ Quizzes</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="card text-center h-100 border-0 shadow-sm">
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <i class="fas fa-music fa-2x text-primary"></i>
+                            </div>
+                            <h5 class="card-title">Music</h5>
+                            <p class="card-text small text-muted">350+ Quizzes</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h2 class="fw-bold mb-4">Ready to Test Your Knowledge?</h2>
+                    <p class="lead mb-4">Join thousands of knowledge enthusiasts who use QuizMaster daily to learn, compete, and have fun.</p>
+                    <div class="d-flex flex-wrap gap-2">
+                        <button class="btn btn-primary btn-lg">
+                            <i class="fas fa-user-plus me-2"></i>
+                            Sign Up for Free
+                        </button>
+                        <button class="btn btn-outline-dark btn-lg">
+                            <i class="fas fa-info-circle me-2"></i>
+                            Learn More
+                        </button>
+                    </div>
+                </div>
+                <div class="col-lg-6 mt-5 mt-lg-0">
+                    <img src="action.jpeg" alt="Call to action" class="img-fluid rounded">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">What Our Users Say</h2>
+                <p class="text-muted">Join thousands of satisfied quiz enthusiasts</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <p class="testimonial-quote">"Quick QuizMaster has revolutionized how I study for exams. The variety of topics and difficulty levels keeps me engaged while learning."</p>
+                        <div class="d-flex align-items-center">
+                            <img src="2.jpg" alt="User avatar" class="testimonial-avatar">
+                            <div>
+                                <p class="testimonial-name">Sarah Johnson</p>
+                                <p class="testimonial-role">University Student</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <p class="testimonial-quote">"I use Quick QuizMaster to create fun trivia sessions for my classroom. My students love competing and it makes learning more interactive."</p>
+                        <div class="d-flex align-items-center">
+                            <img src="1.jpg" alt="User avatar" class="testimonial-avatar">
+                            <div>
+                                <p class="testimonial-name">Michael Rodriguez</p>
+                                <p class="testimonial-role">High School Teacher</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <p class="testimonial-quote">"The leaderboard feature adds a competitive edge that keeps me coming back. I've significantly improved my knowledge in various fields."</p>
+                        <div class="d-flex align-items-center">
+                            <img src="3.jpg" alt="User avatar" class="testimonial-avatar">
+                            <div>
+                                <p class="testimonial-name">Emma Thompson</p>
+                                <p class="testimonial-role">Quiz Enthusiast</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <h4 class="footer-heading">Quick QuizMaster</h4>
+                    <p class="mb-4">The ultimate platform for knowledge enthusiasts to test, learn and compete through interactive quizzes.</p>
+                    <div class="mb-4">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3 col-lg-2">
+                    <h5 class="footer-heading">Quick Links</h5>
+                    <a href="#" class="footer-link">Home</a>
+                    <a href="#" class="footer-link">About Us</a>
+                    <a href="#" class="footer-link">Categories</a>
+                    <a href="#" class="footer-link">Leaderboard</a>
+                    <a href="#" class="footer-link">Contact</a>
+                </div>
+                <div class="col-6 col-md-3 col-lg-2">
+                    <h5 class="footer-heading">Support</h5>
+                    <a href="#" class="footer-link">Help Center</a>
+                    <a href="#" class="footer-link">FAQ</a>
+                    <a href="#" class="footer-link">Community</a>
+                    <a href="#" class="footer-link">Feedback</a>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <h5 class="footer-heading">Subscribe to Our Newsletter</h5>
+                    <p class="mb-3">Get the latest updates on new quizzes and features</p>
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" placeholder="Your email address">
+                        <button class="btn btn-primary" type="button">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 QuizMaster. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

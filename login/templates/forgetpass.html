@@ -6,12 +6,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,height=device-height, initial-scale=1.0">
     <title>Forget Password</title>
-    <link rel="stylesheet" href="{% static "login.css" %}">
+    <link rel="stylesheet" href="{% static 'login.css' %}">
 </head>
 <body>
     <!-- <div class ="navbar">
         <a href="register.html"><button>Sign Up</button></a>
         <a herf="./home.html"><button>Home</button></a> -->
+    </div>
+    <div class ="navbar">
+        <a href="{%url 'login' %}"><button>Back</button></a>
+        <a herf="{% url 'home' %}"><button>Home</button></a>
     </div>
     <header>
         <h1>Forget Page</h1>
