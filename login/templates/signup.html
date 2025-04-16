@@ -19,11 +19,12 @@
     </header>
     <div class="login-form">
         <form method = "POST">
+            {% csrf_token %}
             <input type="email" placeholder="Email" name="email"><br>
             <input type="text" placeholder="Username" name="username"><br>
             <input type="password" placeholder="Password" name="password"><br>
             <input type="password" placeholder="Confirm Password" name="confirm_password"><br>
-            <input type="submit" value="Login"><br>
+            <input type="submit" value="Submit"><br>
             <input type="reset" value="Reset"><br>
         </form>
     </div>
