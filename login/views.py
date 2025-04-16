@@ -18,13 +18,13 @@ def login_view(request):
             return redirect('home')
         else:
             error_message = "Invalid username or password"
-    return render(request, 'login.html')
+    return render(request, 'login/login.html')
 
 def signup_view(request):
-    return render(request, 'signup.html')
+    return render(request, 'login/signup.html')
 
 def forgetpass(request):
-    return render(request, 'forgetpass.html')
+    return render(request, 'login/forgetpass.html')
 
 def home_view(request):
-    return render(request, '../templates/home.html')
+    return render(request, 'home.html')
