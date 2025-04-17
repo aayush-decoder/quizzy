@@ -23,11 +23,17 @@
     </header>
     <div class="login-form">
         <form method = "POST">
-           <input type="email" placeholder="Email" name="email"><br>
-           <input type="submit" value="Send Reset Link"><br>
-           <input type="reset" value="Reset"><br>
-           
+            {% csrf_token %}
+            <input type="username" placeholder="username" name="username" required><br>
+            <input type="submit" value="Send Reset Link"><br>
+            <input type="reset" value="Reset"><br>
         </form>
+        {% if error_message %}
+            <p style="color:red;">{{ error_message }}</p>
+        {% endif %}
+        {% if success_message %}
+            <p style="color:green;">{{ success_message }}</p>
+        {% endif %}
     </div>
 </body>
 </html>

@@ -43,6 +43,18 @@ def signup_view(request):
     return render(request, 'signup.html')
 
 def forgetpass(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        # email = request.POST.get('email')
+        # Here you would typically handle the password reset logic
+        # For example, send a password reset email or redirect to a password reset page
+        user = User.objects.filter(username=username).first()
+        if user:
+            # Logic to send password reset email or redirect to password reset page
+            return redirect('login')
+        else:
+            error_message = "User not found"
+            return render(request, 'forgetpass.html', {'error_message': error_message})
     return render(request, 'forgetpass.html')
 
 def home_view(request):

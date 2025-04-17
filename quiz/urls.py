@@ -24,5 +24,7 @@ urlpatterns = [
     path('', include('login.urls')),
     path('auth/', include('login.urls')),
     path('quiz/', views.quiz, name="quiz"),
+    path('logout/', views.logout_view, name='logout')
+
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
