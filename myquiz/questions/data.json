@@ -1,0 +1,43 @@
+[
+    {
+      "question": "What is the capital of Australia?",
+      "option1": "Sydney",
+      "option2": "Melbourne",
+      "option3": "Canberra",
+      "option4": "Perth",
+      "key": 3
+    },
+    {
+      "question": "Which planet is known as the Red Planet?",
+      "option1": "Earth",
+      "option2": "Mars",
+      "option3": "Jupiter",
+      "option4": "Saturn",
+      "key": 2
+    },
+    {
+      "question": "Who wrote the national anthem of India?",
+      "option1": "Bankim Chandra Chatterjee",
+      "option2": "Rabindranath Tagore",
+      "option3": "Subhash Chandra Bose",
+      "option4": "Sarojini Naidu",
+      "key": 2
+    },
+    {
+      "question": "Which gas is most abundant in the Earth's atmosphere?",
+      "option1": "Oxygen",
+      "option2": "Carbon Dioxide",
+      "option3": "Nitrogen",
+      "option4": "Hydrogen",
+      "key": 3
+    },
+    {
+      "question": "How many players are there in a cricket team?",
+      "option1": "9",
+      "option2": "10",
+      "option3": "11",
+      "option4": "12",
+      "key": 3
+    }
+  ]
+  
