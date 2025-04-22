@@ -1,28 +1,29 @@
-body{
+/* body{
     background-image:image-set(url('../media/images.jpg'));
-    background-repeat: no-repeat;
-    background-size:cover;
+    background-repeat:repeat-y;
+    background-size:cover; */
     /* background-color: black; */
-    margin: 10px;
+    
+    /* margin: 10px;
 }
 
 h1{
     color: white;
     text-align: center;
     font-size: 100px;
-    margin-top: 20px;
+    margin-top: 20px; */
     /* margin-bottom: 200px; */
     /* color: rgb(255, 255, 255); */
     /* animation: color-change 5s linear 2s infinite alternate-reverse; */
-}
+/* }
 .navbar{
     display:flex;
-    width: 100%;
+    width: 100%; */
     /* background-color: rgb(0, 115, 255); */
-    text-align: center;
-    justify-content: space-around;
+    /* text-align: center;
+    justify-content: space-around; */
     /* align- */
-    a button{
+    /* a button{
         width: 80px;
         height: 30px;
         background-color: rgba(0, 0, 0);
@@ -30,25 +31,25 @@ h1{
         border-radius: 20px;
         margin-right:10px;
         margin-left:0px;
-        cursor: pointer;
+        cursor: pointer; */
         /* animation: color-change 5s linear 2s infinite alternate; */
-        transition: all 0.5s ease-in-out;
+        /* transition: all 0.5s ease-in-out;
     }
-    
+     */
     /* position: fixed; */
-}
-.navbar a button:hover{
+/* } */
+/* .navbar a button:hover{
     width: 100px;
     background-color: rgba(255, 255, 255);
     color: rgb(0, 0, 0);
-    transition: 0.5s;
-}
-.navbar a button:active{
+    transition: 0.5s; */
+/* } */
+/* .navbar a button:active{ */
     /* background-color: rgb(0, 0, 0); */
     /* color: rgb(255, 255, 255);
      */
-     opacity: 0.5;
-}
+     /* opacity: 0.5; */
+/* } */
 /* @keyframes color-change {
     0% { background-color: rgb(0, 0, 0); color: white;}
     25% { background-color: rgb(56, 56, 56);color: white; }
@@ -57,29 +58,46 @@ h1{
     100% { background-color: rgb(255, 255, 255); }
     
 } */
-.login-form{
-    display: block;
-    margin: 0 auto;
-    width: 400px;
-    padding: 20px;    
-    border: 10px solid rgba(255, 255, 255, 0.659);
-    border-style:double;
-    border-radius: 10px;
-    background-color: rgba(123, 189, 239, 0.267);
-    color: white;
+/* .login-form{
+    align-items: center;
+    margin: auto;
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+
+    top: 50%;
+    left: 50%;
+    transform:translate(0%, 50%);
+    width: 400px; */
+    /* padding: 20px;     */
+    /* border: 3px solid rgba(255, 255, 255, 0.46);
+    border-style: solid;
+    border-radius: 30px;
+    background-color:rgba(96, 153, 197, 0.245);
+    color: rgb(255, 255, 255);
     text-align: center;
-    margin-top: 20px;
+    box-shadow: 10px 10px 15px rgb(0, 0, 0);
+    .login-form-footer{
+        display:block;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0px;
+        background-color: rgb(0, 0, 0);
+        p{
+            padding:0;
+            color: rgb(255, 255, 255);
+        }
+    }
     input{
         display: block;
         margin: 0 auto;
         margin-bottom: 10px;
         width: 300px;
-        border: 1px solid white;
+        border: 1px solid rgb(255, 255, 255);
         border-radius: 5px;
         padding: 5px;
         background-color: rgb(255, 255, 255);
         color: rgb(0, 0, 0);
-        transition: 0.5s ease-in-out ;
+        transition: 0.5s  ;
     }
     
     a{
@@ -90,14 +108,235 @@ h1{
 
     }
 }
-.login-form form input:hover{
-    width: 350px;
-    background-color: rgb(0, 0, 0);
+.login-form form input:hover{ */
+    /* width: 350px; */
+    /* background-color: rgb(0, 0, 0);
     color: rgb(255, 255, 255);
 }
 
 .login-form a:hover{
-    text-decoration: underline;
+    text-decoration: underline; */
     /* background-color: rgb(0, 0, 0); */
-    color: rgb(13, 0, 255);
+    /* color: rgb(13, 0, 255); */
+/* } */
+/* @media (max-width: 600px) {
+ */
+    /* h1{
+        font-size: 50px;
+    }
+    .navbar{
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .navbar a button{
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .login-form{
+        width: 90%;
+        padding: 10px;
+    }
+    .login-form form input{
+        width: 90%;
+    } */
+/* } */
+/* Reset & Basics */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body, html {
+    height: 100%;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  body.light-theme {
+    background-color: #ffffff;
+    color: #000000;
+  }
+  
+  body.dark-theme {
+    background-color: #121212;
+    color: white;
+  }
+  
+  body.dark-theme .login-form-header {
+    background-color: #1e1e1e;
+    color: white;
+  }
+  
+  body.dark-theme input,
+  body.dark-theme input[type="submit"] {
+    background-color: #333;
+    color: white;
+    border: 1px solid #888;
+  }
+  
+  body.dark-theme .login-form-footer {
+    color: #ccc;
+  }
+  body.dark-theme .login-form-header h2 {
+    color: #ccc;
+  }
+  
+  body.dark-theme a {
+    color: #66aaff;
+  }
+  
+  /* Navbar */
+  .navbar {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+  
+  .navbar button {
+    margin-left: 10px;
+    padding: 10px 16px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .navbar button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Main Layout */
+  .login-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 100vh;
+  }
+  /* Theme Switcher Styling */
+#themeSwitcher {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 0.95rem;
+    outline: none;
+    background-color: #ffffff;
+    color: #000000;
+    transition: background-color 0.3s, color 0.3s;
 }
+
+/* Dark Theme Dropdown */
+body.dark-theme #themeSwitcher {
+    background-color: #2c2c2c;
+    color: #ffffff;
+    border: 1px solid #666;
+}
+
+/* Light Theme Dropdown */
+body.light-theme #themeSwitcher {
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid #ccc;
+}
+
+/* On Hover */
+#themeSwitcher:hover {
+    cursor: pointer;
+    border-color: #007bff;
+}
+.navbar select {
+    margin-left: 5px;
+    margin-top: 4px;
+}
+
+  /* Left Image Section */
+  .login-form::before {
+    content: "";
+    background: url('../media/7677.jpg_wh860.jpg') no-repeat center center;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+  }
+  
+  /* Right Form Section */
+  .login-form-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem;
+    background-color: #f9f9f9;
+  }
+  
+  .login-form-header h2 {
+    margin-bottom: 1.5rem;
+    color: #333;
+  }
+  .login-form-header form input[type="email"],
+  .login-form-header form input[type="text"],
+  .login-form-header form input[type="password"],
+  .login-form-header form input[type="reset"] ,
+  .login-form-header form input[type="submit"] {
+    width: 100%;
+    max-width: 300px;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+  
+  .login-form-header form input[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .login-form-header form input[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+  
+  .login-form-header a {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+  
+  .login-form-header a:hover {
+    text-decoration: underline;
+  }
+  
+  .login-form-footer {
+    text-align: center;
+    padding: 1rem;
+    color: #777;
+    font-size: 0.9rem;
+  }
+  @media (max-width: 768px) {
+    .login-form {
+      grid-template-columns: 1fr;
+    }
+  
+    .login-form::before {
+      display: none;
+    }
+  
+    .login-form-header {
+      padding: 2rem;
+    }
+  
+    .login-form-header h2 {
+      font-size: 1.5rem;
+    }
+  
+    .login-form-header form input[type="email"],
+    .login-form-header form input[type="text"],
+    .login-form-header form input[type="password"],
+    .login-form-header form input[type="reset"] ,
+    .login-form-header form input[type="submit"] {
+      max-width: 90%;
+    }
+    
+  }

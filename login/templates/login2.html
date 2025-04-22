@@ -1,18 +1,17 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,height=device-height, initial-scale=1.0">
-    <title>Sign up Page</title>
-    <link rel="stylesheet" href="{% static "login.css" %}">
+    <title>Login_Page</title>
+    <link rel="stylesheet" href="{% static 'login.css' %}">
 </head>
 <body>
     <div class ="navbar">
-        <a href="{%url 'login' %}"><button>Login</button></a>
+        <a href="{% url 'signup' %}"><button>Sign Up</button></a>
         <a href="{% url 'home' %}"><button>Home</button></a>
-    <!-- Navbar ke andar add kar -->
+        <!-- Navbar ke andar add kar -->
 <select id="themeSwitcher" style="padding: 5px; border-radius: 5px;">
     <option value="light">Light</option>
     <option value="dark">Dark</option>
@@ -21,19 +20,19 @@
     </div>
     <div class="login-form">
         <div class="login-form-header">
-            <h2>User Sign Up</h2>
-        <form method = "POST">
+            <h2>User Login</h2>
+        <form method="POST">
             {% csrf_token %}
-            <input type="email" placeholder="Email" name="email"><br>
-            <input type="text" placeholder="Username" name="username"><br>
-            <input type="password" placeholder="Password" name="password"><br>
-            <input type="password" placeholder="Confirm Password" name="confirm_password"><br>
-            <input type="submit" value="Submit"><br>
-            <input type="reset" value="Reset"><br>
+            <input type="text" placeholder="Username" name="username" required ><br>
+            <input type="password" placeholder="Password" name="password" required><br>
+            <input type="submit" value="Login" ><br>
+           
         </form>
-    </div>
+
+        <span><a href="{% url 'forgetpass' %}">Forget Password</a></`span><br>
+        <a href="{% url 'signup' %}">Sign Up</a></div>
         <div class="login-form-footer">
-            <p>Welcome to the Quiz App! Please Sign Up to continue.</p>
+            <p>Welcome to the Quiz App! Please login to continue.</p>
         </div>
     </div>
 </body>

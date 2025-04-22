@@ -17,7 +17,7 @@ def login_view(request):
         else:
             error_message = "Invalid username or password"
             return render(request, 'home.html', {'error_message': error_message})
-    return render(request, 'login.html')
+    return render(request, 'login2.html')
 
 def signup_view(request):
     if request.method == 'POST':
