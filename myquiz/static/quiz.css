@@ -17,7 +17,7 @@ section {
     position: relative;
 }
 
-.quiz-box {
+.quiz-box, .result-box {
     display: flex;
     justify-content: center;
     align-items: center;
