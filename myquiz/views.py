@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from .models import QuizResult
+from django.db.models import Q
+
 
 
 # Create your views here.
@@ -9,6 +11,19 @@ from .models import QuizResult
 def quiz(request):
     return render(request, 'quiz.html')
 
+def load_leaderboard(request):
+    return render(request, 'leaderboard.html')
+
+
+def leaderboard_view(request, quiz_name):
+    leaderboard = QuizResult.objects.filter(
+        quiz_name__iexact=quiz_name
+    ).order_by('-score', 'time_taken')
+
+    return render(request, 'leaderboard.html', {
+        'leaderboard': leaderboard,
+        'quiz_name': quiz_name.upper(),
+    })
 
 @csrf_exempt
 def save_quiz_result(request):
