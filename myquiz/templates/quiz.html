@@ -11,7 +11,7 @@
 </head>
 <body>
     <section>
-        <div class="quiz-container">
+       
             <div class="quiz-box">
                 <div class="question-box">
                     hello
@@ -24,7 +24,7 @@
                 </div>
                 <button class="btn next-btn" onclick="nextQuestion()">Next</button>
             </div>
-        </div>
+        
     </section>
 
 <script>
@@ -109,6 +109,7 @@
         
             const percentage = (score / questions.length) * 100;
             const userName = prompt("Enter your name:");
+            // const userName = "{{ request.user.username }}";
             const quizName = "GK";
         
             // Save to database
@@ -154,7 +155,7 @@
             }
         }
         
-        
+       
         
     
 </script>

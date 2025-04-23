@@ -45,22 +45,30 @@ section {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: .8rem;
+    gap: 1rem;
     width: 100%;
 }
 
 .option {
-    font-size: 1.2rem;
-    border: 1px solid rgb(72, 72, 72);
+    font-size: 1.15rem;
+    box-shadow: 0 0 4px #9a9a9a;
     border-radius: 8px;
-    padding: .36rem .5rem;
+    padding: .84rem .5rem;
     width: 90%;
+    text-align: center;
+    transition: .2s;
+}
+.option:hover {
+    box-shadow: 0 0 8px rgba(0, 169, 0, 0.675);
+    transition: .5s;
+    transform: scale(1.025);
 }
 
+
 .btn {
-    width: 6.5rem;
-    height: 2.25rem;
-    font: 1rem sans-serif;
+    width: 7.3rem;
+    height: 2.55rem;
+    font: 1.1rem sans-serif;
     border: 0;
     border-radius: 1rem;
     border-bottom: .36rem solid black;

@@ -8,6 +8,9 @@ def login_page(request):
 def register_page(request):
     return render(request, 'signup.html')
 
+def feedback_form_view(request):
+    return render(request, "feedback.html")
+
 def admin(request):
     return render(request,"home.html")
 

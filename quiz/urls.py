@@ -24,7 +24,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('login.urls')),
     path('quiz/', include('myquiz.urls'), name="quiz"),
-    path('logout/', views.logout_view, name='logout')
+    path('logout/', views.logout_view, name='logout'),
+    path('feedback/', views.feedback_form_view, name="feedback")
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
