@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token }}">
     <title>Document</title>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{% static "quiz.css" %}">
@@ -27,10 +28,15 @@
     </section>
 
 <script>
+    let startTime = Date.now();
+// to be changed when start btn is clicked
         let questions = [];
         let response = {};
         let questionNumber = 1;
         let currentQuestionIndex = 0;
+
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+
         
         // loading qsns from json file
         fetch("{% static 'questions/data.json' %}")
@@ -98,23 +104,58 @@
                 if (correct === selected) score++;
             }
         
-            const percentage = (score / questions.length) * 100;
+            const endTime = Date.now();
+            const timeTakenSeconds = ((endTime - startTime) / 1000).toFixed(2);
         
+            const percentage = (score / questions.length) * 100;
+            const userName = prompt("Enter your name:");
+            const quizName = "GK";
+        
+            // Save to database
+            /*let data = new URLSearchParams();
+            data.append('user_name', 'John Doe');
+            data.append('quiz_name', 'GK');
+            data.append('score', 4);
+            data.append('time_taken', 23.5);
+
+            fetch('/quiz/save-result/', {
+                method: 'POST',
+                body: data
+            })
+            .then(res => res.json())
+            .then(result => console.log(result))
+            .catch(err => console.error("Error saving:", err));*/
+
+            $.post("/quiz/save-result/", {
+                user_name: userName,
+                quiz_name: quizName,
+                score: score,
+                time_taken: timeTakenSeconds,
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            }).done(function(response) {
+                console.log("Saved to DB:", response);
+            });
+
+
+        
+            // show result UI
             let resultHTML = `
                 <div class="result-box">
                     <h2>🎉 Quiz Completed!</h2>
-                    <p>Your Score: <strong>${score} / ${questions.length}</strong></p>
+                    <p>Name: <strong>${userName}</strong></p>
+                    <p>Score: <strong>${score} / ${questions.length}</strong></p>
+                    <p>Time Taken: <strong>${timeTakenSeconds}s</strong></p>
                     <p>Percentage: ${percentage.toFixed(1)}%</p>
                 </div>
             `;
-            // $('.quiz-box').css("display", 'none');
-        
             $(".quiz-box").html(resultHTML);
         
             if (percentage > 40) {
-                // do something
-              }
+                // baad me karunga
+            }
         }
+        
+        
         
     
 </script>

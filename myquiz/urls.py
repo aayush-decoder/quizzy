@@ -22,6 +22,7 @@ from . import views
 
 urlpatterns = [
     path('', views.quiz, name="quiz"),
+    path('save-result/', views.save_quiz_result, name='save_result'),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
