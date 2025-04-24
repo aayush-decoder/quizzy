@@ -44,7 +44,7 @@
         fetch("{% static 'questions/data.json' %}")
           .then(res => res.json())
           .then(data => {
-              questions = data["GK"];
+              questions = data['{{ quiz_name }}'];
               displayQuestion(); 
           });
         

@@ -21,7 +21,7 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
-    path('', views.quiz, name="quiz"),
+    path('<str:quiz_name>/', views.quiz, name="quiz"),
     path('save-result/', views.save_quiz_result, name='save_quiz_result'),
     path('leaderboard/', views.load_leaderboard, name="load_leaderboard"),
     path('leaderboard/<str:quiz_name>/', views.leaderboard_view, name='leaderboard'),

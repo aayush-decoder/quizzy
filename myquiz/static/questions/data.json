@@ -1,5 +1,5 @@
 {
-  "GK" : [
+  "gk" : [
     {
       "question": "What is the capital of Australia?",
       "option1": "Sydney",
@@ -41,5 +41,6 @@
       "key": 3
     }
   ]
+
 }
   

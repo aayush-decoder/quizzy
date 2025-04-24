@@ -9,14 +9,13 @@ import pandas as pd
 import seaborn as sns
 from io import BytesIO
 import base64
-from .models import QuizResult
 
 
 
 # Create your views here.
 
-def quiz(request):
-    return render(request, 'quiz.html')
+def quiz(request, quiz_name):
+    return render(request, 'quiz.html', { 'quiz_name': quiz_name })
 
 def load_leaderboard(request):
     return render(request, 'leaderboard.html')
