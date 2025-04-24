@@ -57,6 +57,10 @@
       font-size: 0.9rem;
     }
 
+    input:disabled {
+      cursor: not-allowed;
+    }
+
     textarea {
       resize: vertical;
       min-height: 80px;
@@ -157,10 +161,9 @@
     // loading bar to btn
     $(".submit-btn").html("<div class='loader'></div>")
 
-    // Create a query string with all parameters
     const queryString = `?name=${encodeURIComponent(name)}&experience=${encodeURIComponent(experience)}&improve=${encodeURIComponent(improve)}&rating=${encodeURIComponent(rating)}`;
 
-    // Send the GET request to Google Apps Script
+    //send get req
     fetch(`https://script.google.com/macros/s/AKfycbzg5hFvKSlP6T6Y75E-pHyO-7CxLHHMyv0WvLYzEePMdo-U-F2q8e0Tvc9XiKNxU9oV/exec${queryString}`, {
         method: "GET",
     })

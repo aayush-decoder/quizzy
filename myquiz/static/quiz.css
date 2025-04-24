@@ -117,9 +117,13 @@ section {
     background-color: rgb(142, 1, 142);
     background-image: linear-gradient(to bottom right, rgb(105, 0, 105), rgba(166, 0, 255, 0.95));
     color: white;
+    font-family: 'Sriracha';
+    transition: .2s;
 }
 .next-btn:hover {
     background-color: rgb(40, 40, 255);
+    transform: scale(1.06);
+    transition: .5s;
 }
 
 .enlarge {
