@@ -96,7 +96,7 @@
             const percentage = (score / questions.length) * 100;
             const userName = prompt("Enter your name:");
             // const userName = "{{ request.user.username }}";
-            const quizName = "GK";
+            const quizName = '{{ quiz_name }}';
         
             // Save to database
             /*let data = new URLSearchParams();
@@ -119,8 +119,8 @@
                 score: score,
                 time_taken: timeTakenSeconds,
                 csrfmiddlewaretoken: '{{ csrf_token }}'
-            }).done(function(response) {
-                console.log("Saved to DB:", response);
+            }).done(function(responses) {
+                console.log("Saved to DB:", responses);
             });
 
 

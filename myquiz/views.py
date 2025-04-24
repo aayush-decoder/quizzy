@@ -26,7 +26,7 @@ def leaderboard_view(request, quiz_name):
         quiz_name__iexact=quiz_name
     ).order_by('-score', 'time_taken')
 
-    return render(request, 'leaderboard.html', {
+    return render(request, 'leaderboard_page.html', {
         'leaderboard': leaderboard,
         'quiz_name': quiz_name.upper(),
     })
@@ -98,6 +98,7 @@ def leaderboard_chart(request, quiz_name):
 
 @csrf_exempt
 def save_quiz_result(request):
+    print("🎯 save_quiz_result view called")
     try:
         if request.method == "POST":
             print("POST data:", request.POST)

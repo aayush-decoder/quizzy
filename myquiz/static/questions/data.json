@@ -1,5 +1,5 @@
 {
-  "gk" : [
+  "sample" : [
     {
       "question": "What is the capital of Australia?",
       "option1": "Sydney",
@@ -40,7 +40,91 @@
       "option4": "12",
       "key": 3
     }
+  ],
+
+  "gk" : [
+    {
+      "question": "Nephelococcygia is the practice of doing what?",
+      "option1": "Swimming in freezing water",
+      "option2": "Finding shapes in clouds",
+      "option3": "Breaking glass with your voice",
+      "option4": "Sleeping with your eyes open",
+      "key": 2
+    },
+    {
+      "question": "When was \"YouTube\" founded?",
+      "option1": "February 14, 2005",
+      "option2": "September 12, 2005",
+      "option3": "July 19, 2009",
+      "option4": "May 22, 2004",
+      "key": 1
+    },
+    {
+      "question": "Named after the mallow flower, mauve is a shade of what?",
+      "option1": "Pink",
+      "option2": "Purple",
+      "option3": "Red",
+      "option4": "Brown",
+      "key": 2
+    },
+    {
+      "question": "What alcoholic drink is made from molasses?",
+      "option1": "Rum",
+      "option2": "Vodka",
+      "option3": "Gin",
+      "option4": "Whisky",
+      "key": 1
+    },
+    {
+      "question": "What is the name of the antagonist group in Danganronpa Another Episode: Ultra Despair Girls?",
+      "option1": "Warriors of Hope",
+      "option2": "Warriors of Despair",
+      "option3": "The Ultimate Despair",
+      "option4": "The Monokubs",
+      "key": 1
+    },
+    {
+      "question": "The website \"Shut Up & Sit Down\" reviews which form of media?",
+      "option1": "Films",
+      "option2": "Television Shows",
+      "option3": "Board Games",
+      "option4": "Video Games",
+      "key": 3
+    },
+    {
+      "question": "Which company did Valve cooperate with in the creation of the Vive?",
+      "option1": "Google",
+      "option2": "Oculus",
+      "option3": "HTC",
+      "option4": "Razer",
+      "key": 3
+    },
+    {
+      "question": "Which language is NOT Indo-European?",
+      "option1": "Greek",
+      "option2": "Latvian",
+      "option3": "Hungarian",
+      "option4": "Russian",
+      "key": 3
+    },
+    {
+      "question": "In what year was McDonald's founded?",
+      "option1": "1951",
+      "option2": "1955",
+      "option3": "1947",
+      "option4": "1964",
+      "key": 2
+    },
+    {
+      "question": "If someone said \"you are olid\", what would they mean?",
+      "option1": "You are incomprehensible/an idiot.",
+      "option2": "Your appearance is repulsive.",
+      "option3": "You are out of shape/weak.",
+      "option4": "You smell extremely unpleasant.",
+      "key": 4
+    }
   ]
+  
 
 }
   

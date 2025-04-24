@@ -1,0 +1,23 @@
+{% extends "base/layout.html" %}
+
+{% load static %}
+
+{% block title %}{{ quiz_name }} Quiz Leaderboard{% endblock %}
+
+
+{% comment %} {% block css %}
+<link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static "leaderboard.css" %}">
+{% endblock %} {% endcomment %}
+
+
+
+{% block content %}
+
+{% include 'leaderboard.html' %}
+
+{% endblock %}
+
+
+
+

@@ -1,11 +1,11 @@
 body {
     margin: 0;
-    font-family: 'Orbitron', sans-serif;
     background: linear-gradient(to right, #3f2b96, #a8c0ff);
     color: #ffffff;
   }
 
   .leaderboard-container {
+    font-family: 'Orbitron', sans-serif;
     max-width: 900px;
     margin: 60px auto;
     background: rgba(255, 255, 255, 0.05);
