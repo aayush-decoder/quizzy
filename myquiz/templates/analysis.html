@@ -1,0 +1,107 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ quiz_name }} Quiz Analysis</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static "leaderboard.css" %}">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(to right, #3f2b96, #a8c0ff);
+      color: #ffffff;
+    }
+
+    .analysis-container {
+      max-width: 1000px;
+      margin: 60px auto;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid #7f8c8d;
+      border-radius: 16px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+      padding: 20px;
+    }
+
+    .analysis-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .analysis-header h1 {
+      font-size: 2rem;
+      color: #ffd700;
+      letter-spacing: 2px;
+      margin: 0;
+    }
+
+    .analysis-header h3 {
+      font-size: 1.3rem;
+      color: #bcdffb;
+      font-style: italic;
+    }
+
+    .analysis-header .playful-icon {
+      font-size: 2rem;
+      color: #ff6347;
+    }
+
+    .chart-container {
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .fun-button {
+      background-color:rgba(31, 79, 255, 0.85);
+      color:rgb(232, 227, 255);
+      border: none;
+      border-radius: 50px;
+      padding: 10px 20px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .fun-button:hover {
+      background-color:rgb(249, 71, 255);
+      background-image: linear-gradient(to right, rgb(249, 71, 255), rgba(94, 164, 255, 0.69));
+      border: 2px solid rgb(252, 166, 255);
+      box-shadow: 0 0 4px rgb(247, 0, 255);
+      transform: scale(1.04);
+    }
+
+    .fun-button:focus {
+      outline: none;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="analysis-container">
+    <div class="analysis-header">
+      <h1>🎉 {{ quiz_name }} Quiz Analysis</h1>
+      <h3>How did the participants perform? Let's dive into the fun stats! 📊</h3>
+    </div>
+
+    <div class="chart-container">
+      <h3>Score Distribution</h3>
+      <img src="data:image/png;base64,{{ graphic }}" width="80%" />
+    </div>
+
+    <!-- Include leaderboard table here -->
+    <div class="leaderboard-table-container">
+      <h3>🏅 Top Participants</h3>
+      {% include 'leaderboard.html' %}
+    </div>
+
+    <div style="text-align: center;">
+      <button class="fun-button" onclick="window.history.back()">Go Back</button>
+    </div>
+
+  </div>
+
+</body>
+</html>

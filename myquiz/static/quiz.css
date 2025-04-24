@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Comforter+Brush&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Orbitron:wght@400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sriracha&display=swap');
+
 * {
     /* border: 1px solid black; */
     margin: 0;
@@ -9,6 +11,7 @@ body {
     background-image: image-set(url('../media/bg.jpg'));
     background-repeat: no-repeat;
     background-size:cover;
+    font-family: Poppins;
 }
 
 section {
@@ -34,10 +37,27 @@ section {
     background-color: rgba(238, 238, 238, 0.752);
 }
 
+.animated-entry{
+    animation: fadeInUp 1s ease-out;
+}
+
 .question-box {
     text-align: center;
     font-size: 1.2rem;
     margin-bottom: 2rem;
+    font-weight: 500;
+    background-color: rgb(142, 1, 142);
+    background-image: linear-gradient(to bottom right, rgb(105, 0, 105), rgba(207, 127, 250, 0.95));
+    background-clip: text;
+    color: transparent;
+}
+
+.gradient-color {
+    font-weight: 500;
+    background-color: rgb(142, 1, 142);
+    background-image: linear-gradient(to bottom right, rgb(105, 0, 105), rgba(207, 127, 250, 0.95));
+    background-clip: text;
+    color: transparent;
 }
 
 .options-box {
@@ -57,11 +77,23 @@ section {
     width: 90%;
     text-align: center;
     transition: .2s;
+    font-weight: normal;
 }
 .option:hover {
-    box-shadow: 0 0 8px rgba(0, 169, 0, 0.675);
+    box-shadow: 0 0 8px rgba(136, 28, 136, 0.616);
     transition: .5s;
     transform: scale(1.025);
+}
+.option:focus {
+    transition: .5s;
+    transform: scale(1.025);
+}
+
+.selected-option {
+    background-color: rgb(142, 1, 142);
+    background-image: linear-gradient(to bottom right, rgb(105, 0, 105), rgba(207, 127, 250, 0.95));
+    color: white;
+    font-weight: bold;
 }
 
 
@@ -82,8 +114,9 @@ section {
 }
 
 .next-btn {
+    background-color: rgb(142, 1, 142);
+    background-image: linear-gradient(to bottom right, rgb(105, 0, 105), rgba(166, 0, 255, 0.95));
     color: white;
-    background-color: blue;
 }
 .next-btn:hover {
     background-color: rgb(40, 40, 255);
@@ -104,6 +137,72 @@ section {
     }
 }
 
-@keyframes fade {
-    
+
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+        position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .quiz-box, .result-box {
+        width: 90vw;
+        height: auto;
+        padding: 1.2rem 1rem;
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        margin: 2rem auto;
+    }
+
+    .question-box {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .option {
+        font-size: 1rem;
+        padding: 0.75rem 0.5rem;
+        width: 100%;
+    }
+
+    .btn {
+        width: 100%;
+        font-size: 1rem;
+        height: 2.5rem;
+        margin: 1.5rem 0;
+    }
+
+    .result-box p {
+        font-size: 1rem;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .question-box {
+        font-size: 0.95rem;
+    }
+
+    .option {
+        font-size: 0.95rem;
+    }
+
+    .btn {
+        font-size: 0.95rem;
+    }
 }

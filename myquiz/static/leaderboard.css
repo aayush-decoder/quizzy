@@ -65,3 +65,55 @@ body {
     font-size: 0.9rem;
     color: #dfe6e9;
   }
+
+  .analysis-button {
+    display: inline-block;
+    background: linear-gradient(45deg, #ff6ec4, #7873f5);
+    color: white;
+    font-family: 'Orbitron', sans-serif;
+    text-decoration: none;
+    padding: 12px 24px;
+    font-size: 1.06rem;
+    border-radius: 40px;
+    border: 2px solid #ffffff88;
+    box-shadow: 0 0 15px #ff6ec4;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .analysis-button:hover {
+    transform: scale(1.05);
+    background: linear-gradient(45deg, #7873f5, #ff6ec4);
+    box-shadow: 0 0 20px #ff6ec4;
+  }
+  
+  @media (max-width: 768px) {
+    .leaderboard-container {
+        margin: 30px 10px;
+        padding: 15px;
+    }
+
+    .leaderboard-header h2 {
+        font-size: 1.5rem;
+    }
+
+    th, td {
+        padding: 12px 8px;
+        font-size: 0.85rem;
+    }
+
+    .analysis-button {
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .leaderboard-header h2 {
+        font-size: 1.2rem;
+    }
+
+    table {
+        min-width: 500px; /* allow smaller scrollable tables */
+    }
+}

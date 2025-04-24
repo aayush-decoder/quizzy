@@ -37,6 +37,8 @@
 
         const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
 
+        $(".quiz-box").addClass("animated-entry")
+
         
         // loading qsns from json file
         fetch("{% static 'questions/data.json' %}")
@@ -55,28 +57,12 @@
                 $("#op" + i).html(q["option" + i]);
             }
         
-            $('.option').css({
-                'background-color': 'transparent',
-                'color': 'black',
-                'border-radius': '8px',
-                'font-weight': 'normal'
-            });
+            $('.option').removeClass("selected-option");
         }
         
         function optionSelected(optionId) {
-            $('.option').css({
-                'background-color': 'transparent',
-                'color': 'black',
-                'border-radius': '8px',
-                'font-weight': 'normal'
-            });
-        
-            $('#' + optionId).css({
-                'background-color': '#4CAF50',
-                'color': 'white',
-                'border-radius': '8px',
-                'font-weight': 'bold'
-            });
+            $('.option').removeClass("selected-option");
+            $('#' + optionId).addClass("selected-option");
         
             response['que' + (currentQuestionIndex + 1)] = parseInt(optionId.slice(2));
             console.log(response);
@@ -141,7 +127,7 @@
         
             let resultHTML = `
                 <div class="result-box">
-                    <h2>🎉 Quiz Completed!</h2>
+                    <h2 class="gradient-color">🎉 Quiz Completed!</h2>
                     <p>Name: <strong>${userName}</strong></p>
                     <p>Score: <strong>${score} / ${questions.length}</strong></p>
                     <p>Time Taken: <strong>${timeTakenSeconds}s</strong></p>

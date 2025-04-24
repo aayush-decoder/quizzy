@@ -42,7 +42,18 @@
         {% endfor %}
       </tbody>
     </table>
+
+    <div style="text-align: center; margin: 30px 0;" id="analysisBtn">
+      <a href="{% url 'analysis' quiz_name %}" class="analysis-button">See Full Analysis</a>
+    </div>
   </div>
+
+<script>
+  const url = window.location.href.split('/');
+  if (url[url.length - 1] == "analysis") {
+    document.getElementById("analysisBtn").style.display = 'none';
+  }
+</script>
 
 </body>
 </html>

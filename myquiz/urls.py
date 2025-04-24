@@ -25,6 +25,7 @@ urlpatterns = [
     path('save-result/', views.save_quiz_result, name='save_quiz_result'),
     path('leaderboard/', views.load_leaderboard, name="load_leaderboard"),
     path('leaderboard/<str:quiz_name>/', views.leaderboard_view, name='leaderboard'),
+    path('leaderboard/<str:quiz_name>/analysis', views.leaderboard_chart, name='analysis'),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

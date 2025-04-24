@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Feedback Form</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   <style>
     body {
       font-family: 'Orbitron', sans-serif;
@@ -65,6 +68,8 @@
     }
 
     .submit-btn {
+      display: flex;
+      justify-content:center;
       width: 100%;
       padding: 0.8rem;
       background-color: #8a2be2;
@@ -79,6 +84,23 @@
     .submit-btn:hover {
       background-color: #6a11cb;
     }
+
+    .loader {
+        border: 3px solid rgba(255, 255, 255, 0.2);
+        border-top: 3px solid white; 
+        border-radius: 50%;
+        height: .95rem;
+        aspect-ratio: 1/1;
+        animation: spin 1s linear infinite;
+      }
+  
+      @keyframes spin {
+        0% { transform: rotate(180deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      
+      
   </style>
 </head>
 <body>
@@ -104,7 +126,7 @@
 
     <div class="form-group">
       <label for="rating">Rating (1 to 5)</label>
-      <select id="rating">
+      <select id="rating" required>
         <option value="">Select Rating</option>
         <option value="1">1 - Poor</option>
         <option value="2">2 - Fair</option>
@@ -127,27 +149,32 @@
     form.addEventListener("submit", async function (e) {
       e.preventDefault();
   
-      const name = document.getElementById('name').value; 
-  const experience = document.getElementById('experience').value;
-  const improve = document.getElementById('improve').value;
-  const rating = document.getElementById('rating').value;
+    const name = document.getElementById('name').value; 
+    const experience = document.getElementById('experience').value;
+    const improve = document.getElementById('improve').value;
+    const rating = document.getElementById('rating').value;
 
-  // Create a query string with all parameters
-  const queryString = `?name=${encodeURIComponent(name)}&experience=${encodeURIComponent(experience)}&improve=${encodeURIComponent(improve)}&rating=${encodeURIComponent(rating)}`;
+    // loading bar to btn
+    $(".submit-btn").html("<div class='loader'></div>")
 
-  // Send the GET request to Google Apps Script
-  fetch(`https://script.google.com/macros/s/AKfycbzg5hFvKSlP6T6Y75E-pHyO-7CxLHHMyv0WvLYzEePMdo-U-F2q8e0Tvc9XiKNxU9oV/exec${queryString}`, {
-    method: "GET",
-  })
-  .then(response => response.text())
-  .then(data => {
-    console.log("Success:", data);
-    alert('Thank you for your feedback!');
-  })
-  .catch((error) => {
-    console.error("Error:", error);
-    alert('There was an issue with the submission.');
-  });
+    // Create a query string with all parameters
+    const queryString = `?name=${encodeURIComponent(name)}&experience=${encodeURIComponent(experience)}&improve=${encodeURIComponent(improve)}&rating=${encodeURIComponent(rating)}`;
+
+    // Send the GET request to Google Apps Script
+    fetch(`https://script.google.com/macros/s/AKfycbzg5hFvKSlP6T6Y75E-pHyO-7CxLHHMyv0WvLYzEePMdo-U-F2q8e0Tvc9XiKNxU9oV/exec${queryString}`, {
+        method: "GET",
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log("Success:", data);
+        $(".submit-btn").html("<div class='circle-check'><i class='fas fa-check'></i></div> &nbsp;Feedback Submited");
+        $(".submit-btn").css("background-color", "#4CAF50")
+        $(".circle-check").css("animation", "spin .5s ease-out");
+    })
+    .catch((error) => {
+        console.error("Error:", error);
+        alert('There was an issue with the submission.');
+    });
     });
   </script>
 
