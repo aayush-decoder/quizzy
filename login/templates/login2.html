@@ -12,12 +12,11 @@
         <a href="{% url 'signup' %}"><button>Sign Up</button></a>
         <a href="{% url 'home' %}"><button>Home</button></a>
         <!-- Navbar ke andar add kar -->
-<select id="themeSwitcher" style="padding: 5px; border-radius: 5px;">
-    <option value="light">Light</option>
-    <option value="dark">Dark</option>
-  </select>
-  
-    </div>
+        <select id="themeSwitcher" style="padding: 5px; border-radius: 5px;">
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+        </select>
+      </div>
     <div class="login-form">
         <div class="login-form-header">
             <h2>User Login</h2>
@@ -37,17 +36,19 @@
     </div>
 </body>
 <script>
-    const themeSwitcher = document.getElementById('themeSwitcher');
-    const savedTheme = localStorage.getItem('theme') || 'light';
+  const themeSwitcher = document.getElementById('themeSwitcher');
+  const savedTheme = localStorage.getItem('theme') || 'light';
+
+  document.body.classList.add(`${savedTheme}-theme`);
+  themeSwitcher.value = savedTheme;
+
+  themeSwitcher.addEventListener('change', function() {
+    document.body.classList.remove('light-theme', 'dark-theme');
+    document.body.classList.add(`${this.value}-theme`);
+    localStorage.setItem('theme', this.value);
+  });
+</script>
+
   
-    document.body.classList.add(`${savedTheme}-theme`);
-    themeSwitcher.value = savedTheme;
-  
-    themeSwitcher.addEventListener('change', function() {
-      document.body.classList.remove('light-theme', 'dark-theme');
-      document.body.classList.add(`${this.value}-theme`);
-      localStorage.setItem('theme', this.value);
-    });
-  </script>
   
 </html>

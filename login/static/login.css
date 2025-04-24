@@ -159,12 +159,12 @@ h1{
   }
   
   body.dark-theme {
-    background-color: #121212;
+    background-color: #000000;
     color: white;
   }
   
   body.dark-theme .login-form-header {
-    background-color: #1e1e1e;
+    background-color: #000000;
     color: white;
   }
   
@@ -174,10 +174,16 @@ h1{
     color: white;
     border: 1px solid #888;
   }
-  
-  body.dark-theme .login-form-footer {
-    color: #ccc;
-  }
+  body.light-theme .login-form::before {
+    background: url('../media/images1.jpg') no-repeat center center;
+    background-size: contain;
+}
+
+body.dark-theme .login-form::before {
+    background: url('../media/images2.jpg') no-repeat center center;
+    background-size: contain;
+}
+
   body.dark-theme .login-form-header h2 {
     color: #ccc;
   }
@@ -252,12 +258,17 @@ body.light-theme #themeSwitcher {
   /* Left Image Section */
   .login-form::before {
     content: "";
-    background: url('../media/7677.jpg_wh860.jpg') no-repeat center center;
-    background-size: cover;
+    background: url('../media/images1.jpg') no-repeat center center;
+    background-size:contain;
     height: 100%;
     width: 100%;
   }
-  
+  .login-form{
+    display:grid;
+    justify-content: center;
+    align-items: center;
+
+  }
   /* Right Form Section */
   .login-form-header {
     display: flex;
