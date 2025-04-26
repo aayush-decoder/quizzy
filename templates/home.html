@@ -21,10 +21,10 @@
                 <div class="col-lg-6">
                     <h1 class="hero-heading display-4">Challenge Your Knowledge With Fun Quizzes</h1>
                     <p class="hero-subheading lead">Discover thousands of quizzes on various topics, challenge friends, and prove your expertise in subjects you love.</p>
-                    <button class="btn btn-light btn-lg me-3">
+                    <a href="#quizSection"><button class="btn btn-light btn-lg me-3">
                         <i class="fas fa-play me-2"></i>
                         Start Quiz
-                    </button>
+                    </button></a>
                     <button class="btn btn-outline-light btn-lg">
                         <i class="fas fa-plus me-2"></i>
                         Create Quiz
@@ -73,7 +73,7 @@
     </section>
 
     <!-- Popular Quizzes Section -->
-    <section class="py-5">
+    <section class="py-5" id="quizSection">
         <div class="container">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h2 class="fw-bold mb-0">Popular Quizzes</h2>
@@ -83,7 +83,14 @@
                 <!-- Quiz Card 1 -->
                 <div class="col-md-6 col-lg-3">
                     <div class="quiz-card card h-100">
+                        <div class="quiz-image-wrapper">
                         <img src="../media/home 2.jpeg" class="quiz-image card-img-top" alt="Science quiz">
+                        <div class="quiz-overlay">
+                            <a href="{% url 'quiz' 'space' %}" target="_blank" class="play-button">
+                              Start Quiz
+                            </a>
+                          </div>
+                        </div>
                         <div class="card-body">
                             <span class="quiz-category">Science</span>
                             <h5 class="card-title">The Ultimate Space Quiz</h5>
@@ -107,7 +114,14 @@
                 <!-- Quiz Card 2 -->
                 <div class="col-md-6 col-lg-3">
                     <div class="quiz-card card h-100">
-                        <img src="../media/home 1.jpeg" class="quiz-image card-img-top" alt="History quiz">
+                        <div class="quiz-image-wrapper">
+                            <img src="../media/home 1.jpeg" class="quiz-image card-img-top" alt="Science quiz">
+                            <div class="quiz-overlay">
+                                <a href="{% url 'quiz' 'ancient-civilization' %}" target="_blank" class="play-button">
+                                  Start Quiz
+                                </a>
+                              </div>
+                            </div>
                         <div class="card-body">
                             <span class="quiz-category">History</span>
                             <h5 class="card-title">Ancient Civilizations</h5>
@@ -131,7 +145,14 @@
                 <!-- Quiz Card 3 -->
                 <div class="col-md-6 col-lg-3">
                     <div class="quiz-card card h-100">
-                        <img src="../media/home-3.jpeg" class="quiz-image card-img-top" alt="Entertainment quiz">
+                        <div class="quiz-image-wrapper">
+                            <img src="../media/home-3.jpeg" class="quiz-image card-img-top" alt="Science quiz">
+                            <div class="quiz-overlay">
+                                <a href="https://www.google.com" target="_blank" class="play-button">
+                                  Start Quiz
+                                </a>
+                              </div>
+                            </div>
                         <div class="card-body">
                             <span class="quiz-category">Entertainment</span>
                             <h5 class="card-title">Movie Trivia Challenge</h5>
@@ -155,8 +176,14 @@
                 <!-- Quiz Card 4 -->
                 <div class="col-md-6 col-lg-3">
                     <div class="quiz-card card h-100">
-                        <img src="../media/home 7.jpeg" class="quiz-image card-img-top" alt="Technology quiz">
-                        <div class="card-body">
+                        <div class="quiz-image-wrapper">
+                            <img src="../media/home 7.jpeg" class="quiz-image card-img-top" alt="Science quiz">
+                            <div class="quiz-overlay">
+                                <a href="{% url 'quiz' 'computer' %}" target="_blank" class="play-button">
+                                  Start Quiz
+                                </a>
+                              </div>
+                            </div>                        <div class="card-body">
                             <span class="quiz-category">Technology</span>
                             <h5 class="card-title">Digital World Quiz</h5>
                             <p class="quiz-difficulty">

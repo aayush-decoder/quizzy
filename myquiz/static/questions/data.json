@@ -446,7 +446,7 @@
     }
   ],
 
-  "computers" : [
+  "computer" : [
     {
       "question": "Which computer hardware device provides an interface for all other connected devices to communicate?",
       "option1": "Central Processing Unit",
