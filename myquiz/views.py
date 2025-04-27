@@ -36,8 +36,14 @@ def load_all_quizes(request):
     return render(request, 'quizes.html', {'quiz_data': quiz_data})
     return render(request, "quizes.html")
 
+
+
+
+
 def load_leaderboard(request):
     return render(request, 'leaderboard.html')
+
+
 
 
 def leaderboard_view(request, quiz_name):
