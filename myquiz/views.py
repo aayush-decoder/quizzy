@@ -9,14 +9,32 @@ import pandas as pd
 import seaborn as sns
 from io import BytesIO
 import base64
-from .models import QuizResult
+import json
+import os
+from django.conf import settings
 
 
 
 # Create your views here.
 
-def quiz(request):
-    return render(request, 'quiz.html')
+def quiz(request, quiz_name):
+    return render(request, 'quiz.html', { 'quiz_name': quiz_name })
+
+def load_all_quizes(request):
+    number_of_ques = -1
+    with open(os.path.join(settings.BASE_DIR, 'myquiz/static/questions/data.json')) as f:
+        quiz_data = json.load(f)
+
+    titles = list(quiz_data.keys())
+    number_of_ques = [len(x) for x in list(quiz_data.values())]
+    attempts = []
+    for title in titles:
+        length = len(list(QuizResult.objects.filter(quiz_name__iexact=title)))
+        attempts.append(length)
+
+    quiz_data = zip(titles, number_of_ques, attempts)
+    return render(request, 'quizes.html', {'quiz_data': quiz_data})
+    return render(request, "quizes.html")
 
 def load_leaderboard(request):
     return render(request, 'leaderboard.html')
@@ -27,7 +45,7 @@ def leaderboard_view(request, quiz_name):
         quiz_name__iexact=quiz_name
     ).order_by('-score', 'time_taken')
 
-    return render(request, 'leaderboard.html', {
+    return render(request, 'leaderboard_page.html', {
         'leaderboard': leaderboard,
         'quiz_name': quiz_name.upper(),
     })
@@ -99,6 +117,7 @@ def leaderboard_chart(request, quiz_name):
 
 @csrf_exempt
 def save_quiz_result(request):
+    print("🎯 save_quiz_result view called")
     try:
         if request.method == "POST":
             print("POST data:", request.POST)

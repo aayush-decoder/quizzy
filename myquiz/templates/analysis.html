@@ -1,20 +1,22 @@
+{% extends "base/layout.html" %}
+
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>{{ quiz_name }} Quiz Analysis</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{% static "leaderboard.css" %}">
+
+{% block title %}{{ quiz_name }} Quiz Analysis{% endblock %}
+
+
+{% block css %}
+<link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static "leaderboard.css" %}">
   <style>
     body {
       margin: 0;
-      font-family: 'Orbitron', sans-serif;
       background: linear-gradient(to right, #3f2b96, #a8c0ff);
       color: #ffffff;
     }
 
     .analysis-container {
+      font-family: 'Orbitron', sans-serif;
       max-width: 1000px;
       margin: 60px auto;
       background: rgba(255, 255, 255, 0.05);
@@ -77,31 +79,36 @@
     }
 
   </style>
-</head>
-<body>
+{% endblock %}
 
-  <div class="analysis-container">
-    <div class="analysis-header">
-      <h1>🎉 {{ quiz_name }} Quiz Analysis</h1>
-      <h3>How did the participants perform? Let's dive into the fun stats! 📊</h3>
-    </div>
 
-    <div class="chart-container">
-      <h3>Score Distribution</h3>
-      <img src="data:image/png;base64,{{ graphic }}" width="80%" />
-    </div>
 
-    <!-- Include leaderboard table here -->
-    <div class="leaderboard-table-container">
-      <h3>🏅 Top Participants</h3>
-      {% include 'leaderboard.html' %}
-    </div>
+{% block content %}
 
-    <div style="text-align: center;">
-      <button class="fun-button" onclick="window.history.back()">Go Back</button>
-    </div>
 
+<div class="analysis-container">
+  <div class="analysis-header">
+    <h1>🎉 {{ quiz_name }} Quiz Analysis</h1>
+    <h3>How did the participants perform? Let's dive into the fun stats! 📊</h3>
   </div>
 
-</body>
-</html>
+  <div class="chart-container">
+    <h3>Score Distribution</h3>
+    <img src="data:image/png;base64,{{ graphic }}" width="80%" />
+  </div>
+
+  <div class="leaderboard-table-container">
+    <h3>🏅 Top Participants</h3>
+    {% include 'leaderboard.html' %}
+  </div>
+
+  <div style="text-align: center;">
+    <button class="fun-button" onclick="window.history.back()">Go Back</button>
+  </div>
+
+</div>
+    
+
+{% endblock %}
+
+

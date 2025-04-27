@@ -1,283 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quick Quiz Masters - Test Your Knowledge</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-     <style>
-        :root {
-            --primary-color: #25234e;
-            --secondary-color: #6d66d1;
-            --accent-color: #ff6584;
-            --light-color: #f8f9fa;
-            --dark-color: #32393f;
-        }
-        
-        body {
-           
-             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f5f7fa;
-        }
-        
-        .navbar {
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        
-        .navbar-brand {
-            font-weight: 700;
-            color: var(--primary-color);
-        }
-        
-        .nav-link {
-            font-weight: 600;
-            color: var(--dark-color);
-            margin: 0 10px;
-            transition: color 0.3s;
-        }
-        
-        .nav-link:hover {
-            color: var(--primary-color);
-        }
-        
-        .btn-primary {
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
-            font-weight: 600;
-            padding: 8px 20px;
-            border-radius: 4px;
-            transition: all 0.3s;
-        }
-        
-        .btn-primary:hover {
-            background-color: var(--secondary-color);
-            border-color: var(--secondary-color);
-            transform: translateY(-2px);
-        }
-        
-        .hero-section {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            padding: 80px 0;
-            color: white;
-            border-radius: 0 0 30px 30px;
-        }
-        
-        .hero-heading {
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-        
-        .hero-subheading {
-            font-weight: 300;
-            margin-bottom: 30px;
-            opacity: 0.9;
-        }
-        
-        .hero-image {
-            max-width: 100%;
-            height: auto;
-        }
-        
-        .feature-icon {
-            background-color: var(--light-color);
-            color: var(--primary-color);
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            margin-bottom: 20px;
-            box-shadow: 0 10px 20px rgba(108, 99, 255, 0.1);
-        }
-        
-        .feature-title {
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-        
-        .quiz-card {
-            border: none;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        
-        .quiz-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
-        }
-        
-        .quiz-image {
-            height: 180px;
-            object-fit: cover;
-        }
-        
-        .quiz-category {
-            background-color: var(--primary-color);
-            color: white;
-            font-size: 12px;
-            font-weight: 600;
-            padding: 5px 10px;
-            border-radius: 4px;
-            display: inline-block;
-            margin-bottom: 10px;
-        }
-        
-        .quiz-difficulty {
-            font-size: 14px;
-            color: #6c757d;
-        }
-        
-        .quiz-stats {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 15px;
-            font-size: 14px;
-            color: #6c757d;
-        }
-        
-        .cta-section {
-            background-color: var(--light-color);
-            padding: 80px 0;
-            border-radius: 30px;
-            margin: 50px 0;
-        }
-        
-        .testimonial-card {
-            background-color: white;
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            height: 100%;
-        }
-        
-        .testimonial-quote {
-            font-size: 18px;
-            font-style: italic;
-            margin-bottom: 20px;
-        }
-        
-        .testimonial-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-right: 15px;
-        }
-        
-        .testimonial-name {
-            font-weight: 600;
-            margin-bottom: 0;
-        }
-        
-        .testimonial-role {
-            font-size: 14px;
-            color: #6c757d;
-        }
-        
-        footer {
-            background-color: var(--dark-color);
-            color: white;
-            padding: 60px 0 20px;
-        }
-        
-        .footer-heading {
-            font-weight: 600;
-            margin-bottom: 20px;
-        }
-        
-        .footer-link {
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-            margin-bottom: 10px;
-            display: block;
-            transition: color 0.3s;
-        }
-        
-        .footer-link:hover {
-            color: white;
-        }
-        
-        .social-icon {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: rgba(143, 17, 17, 0.1);
-            color: white;
-            margin-right: 10px;
-            transition: background-color 0.3s;
-        }
-        
-        .social-icon:hover {
-            background-color: var(--primary-color);
-        }
-        
-        .copyright {
-            text-align: center;
-            padding-top: 30px;
-            margin-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.5);
-        }
-    </style>
+{% extends "base/layout.html" %}
 
-    </head>
-<body>
+{% load static %}
 
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <i class="fas fa-brain me-2"></i>
-                Quick Quizmasters
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Categories</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Leaderboard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
-                    </li>
-                </ul>
-                <div class="ms-3">
-                    {% if user.is_authenticated %}
-                        <div class="dropdown">
-                            <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                                welcome {{ user.username }}
-                            </button>
-                            <ul class="dropdown-menu">
-                                {% comment %} <li><a class="dropdown-item" href="#">Profile</a></li>
-                                <li><a class="dropdown-item" href="#">Settings</a></li> {% endcomment %}
-                                {% comment %} <li><hr class="dropdown-divider"></li> {% endcomment %}
-                                <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
-                            </ul>
-                        </div>
-                    {% else %}
-                        <a href="{% url 'login' %}"><button class="btn btn-outline-primary me-2">Log In</button></a>
-                        <a href="{% url 'signup'%}"><button class="btn btn-primary">Sign Up</button></a>
-                    {% endif %}
-                </div>
-                
-            </div>
-        </div>
-    </nav>
+{% block title %}Home{% endblock %}
+
+
+{% block css %}
+    <link rel="stylesheet" href="{% static "home.css" %}">
+{% endblock %}
+
+
+
+{% block content %}
+
 
     <!-- Hero Section -->
     <section class="hero-section">
@@ -286,10 +21,10 @@
                 <div class="col-lg-6">
                     <h1 class="hero-heading display-4">Challenge Your Knowledge With Fun Quizzes</h1>
                     <p class="hero-subheading lead">Discover thousands of quizzes on various topics, challenge friends, and prove your expertise in subjects you love.</p>
-                    <button class="btn btn-light btn-lg me-3">
+                    <a href="#quizSection"><button class="btn btn-light btn-lg me-3">
                         <i class="fas fa-play me-2"></i>
                         Start Quiz
-                    </button>
+                    </button></a>
                     <button class="btn btn-outline-light btn-lg">
                         <i class="fas fa-plus me-2"></i>
                         Create Quiz
@@ -338,7 +73,7 @@
     </section>
 
     <!-- Popular Quizzes Section -->
-    <section class="py-5">
+    <section class="py-5" id="quizSection">
         <div class="container">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h2 class="fw-bold mb-0">Popular Quizzes</h2>
@@ -348,7 +83,14 @@
                 <!-- Quiz Card 1 -->
                 <div class="col-md-6 col-lg-3">
                     <div class="quiz-card card h-100">
+                        <div class="quiz-image-wrapper">
                         <img src="../media/home 2.jpeg" class="quiz-image card-img-top" alt="Science quiz">
+                        <div class="quiz-overlay">
+                            <a href="{% url 'quiz' 'space' %}" target="_blank" class="play-button">
+                              Start Quiz
+                            </a>
+                          </div>
+                        </div>
                         <div class="card-body">
                             <span class="quiz-category">Science</span>
                             <h5 class="card-title">The Ultimate Space Quiz</h5>
@@ -372,7 +114,14 @@
                 <!-- Quiz Card 2 -->
                 <div class="col-md-6 col-lg-3">
                     <div class="quiz-card card h-100">
-                        <img src="../media/home 1.jpeg" class="quiz-image card-img-top" alt="History quiz">
+                        <div class="quiz-image-wrapper">
+                            <img src="../media/home 1.jpeg" class="quiz-image card-img-top" alt="Science quiz">
+                            <div class="quiz-overlay">
+                                <a href="{% url 'quiz' 'ancient-civilization' %}" target="_blank" class="play-button">
+                                  Start Quiz
+                                </a>
+                              </div>
+                            </div>
                         <div class="card-body">
                             <span class="quiz-category">History</span>
                             <h5 class="card-title">Ancient Civilizations</h5>
@@ -396,7 +145,14 @@
                 <!-- Quiz Card 3 -->
                 <div class="col-md-6 col-lg-3">
                     <div class="quiz-card card h-100">
-                        <img src="../media/home-3.jpeg" class="quiz-image card-img-top" alt="Entertainment quiz">
+                        <div class="quiz-image-wrapper">
+                            <img src="../media/home-3.jpeg" class="quiz-image card-img-top" alt="Science quiz">
+                            <div class="quiz-overlay">
+                                <a href="https://www.google.com" target="_blank" class="play-button">
+                                  Start Quiz
+                                </a>
+                              </div>
+                            </div>
                         <div class="card-body">
                             <span class="quiz-category">Entertainment</span>
                             <h5 class="card-title">Movie Trivia Challenge</h5>
@@ -420,8 +176,14 @@
                 <!-- Quiz Card 4 -->
                 <div class="col-md-6 col-lg-3">
                     <div class="quiz-card card h-100">
-                        <img src="../media/home 7.jpeg" class="quiz-image card-img-top" alt="Technology quiz">
-                        <div class="card-body">
+                        <div class="quiz-image-wrapper">
+                            <img src="../media/home 7.jpeg" class="quiz-image card-img-top" alt="Science quiz">
+                            <div class="quiz-overlay">
+                                <a href="{% url 'quiz' 'computer' %}" target="_blank" class="play-button">
+                                  Start Quiz
+                                </a>
+                              </div>
+                            </div>                        <div class="card-body">
                             <span class="quiz-category">Technology</span>
                             <h5 class="card-title">Digital World Quiz</h5>
                             <p class="quiz-difficulty">
@@ -605,6 +367,6 @@
             </div>
         </div>
     </footer>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+    
+
+{% endblock %}

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token }}">
-    <title>Document</title>
+    <title>{{ quiz_name|capfirst }} Quiz</title>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{% static "quiz.css" %}">
 </head>
@@ -13,6 +13,7 @@
     <section>
        
             <div class="quiz-box">
+                <meter id="progressBar" value="1" min="0" max="10"></meter>
                 <div class="question-box">
                     hello
                 </div>
@@ -22,11 +23,10 @@
                     <div class="option" id="op3" onclick="optionSelected(this.id);">op3</div>
                     <div class="option" id="op4" onclick="optionSelected(this.id);">op4</div>
                 </div>
-                <button class="btn next-btn" onclick="nextQuestion()">Next</button>
+                <button class="btn Btn next-btn" onclick="nextQuestion()">Next</button>
             </div>
         
     </section>
-
 <script>
     let startTime = Date.now();
 // to be changed when start btn is clicked
@@ -44,7 +44,7 @@
         fetch("{% static 'questions/data.json' %}")
           .then(res => res.json())
           .then(data => {
-              questions = data["GK"];
+              questions = data['{{ quiz_name }}'];
               displayQuestion(); 
           });
         
@@ -96,7 +96,7 @@
             const percentage = (score / questions.length) * 100;
             const userName = prompt("Enter your name:");
             // const userName = "{{ request.user.username }}";
-            const quizName = "GK";
+            const quizName = '{{ quiz_name }}';
         
             // Save to database
             /*let data = new URLSearchParams();
@@ -119,29 +119,86 @@
                 score: score,
                 time_taken: timeTakenSeconds,
                 csrfmiddlewaretoken: '{{ csrf_token }}'
-            }).done(function(response) {
-                console.log("Saved to DB:", response);
+            }).done(function(responses) {
+                console.log("Saved to DB:", responses);
             });
 
 
         
             let resultHTML = `
-                <div class="result-box">
-                    <h2 class="gradient-color">🎉 Quiz Completed!</h2>
-                    <p>Name: <strong>${userName}</strong></p>
-                    <p>Score: <strong>${score} / ${questions.length}</strong></p>
-                    <p>Time Taken: <strong>${timeTakenSeconds}s</strong></p>
-                    <p>Percentage: ${percentage.toFixed(1)}%</p>
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+            <div class="result-box p-4 rounded-4 shadow-lg bg-white text-center" style="max-width: 500px; margin: auto;">
+                <h2 class="gradient-text mb-6"><i class="fa-solid fa-trophy"></i> Quiz Completed!</h2>
+                <div class="mb-3">
+                    <p class="mb-1"><i class="fas fa-user"></i> <strong>${userName}</strong></p>
+                    <p class="mb-1"><i class="fas fa-star"></i> You scored <strong>${score} </strong> out of ${questions.length}</p>
+                    <div class="circular-progress">
+                        <div class="inner-circle">
+                            <span class="progress-value">0%</span>
+                        </div>
+                    </div>
+                    <p class="mb-1"><i class="fas fa-clock"></i> Time Taken: <strong>${timeTakenSeconds}s</strong></p>
+                  
                 </div>
-            `;
-            $(".quiz-box").html(resultHTML);
+                {% include "star_rating.html" %}`
+
+                + `t>
+                
+                <div class="d-flex flex-column gap-2 mt-4">
+                    <div>
+                        <button class="btn btn-gradient text-white"><i class="fas fa-list-ol"></i> See Leaderboard</button>
+                        <button class="btn btn-gradient text-white"><i class="fas fa-check-circle"></i> See Answers</button>
+                    </div>
+                    <button class="btn btn-gradient text-white"><i class="fas fa-chart-line"></i> See Full Analysis</button>
+                </div>
+            </div>
+`;
+$(".quiz-box").html(resultHTML);
+
+
+            
+let percentage2 = (score / questions.length) * 100;
+let circularProgress = document.querySelector(".circular-progress");
+let progressValue = document.querySelector(".progress-value");
+
+let progressStartValue = 0;
+let speed = 20; // smaller = faster animation
+
+let progress = setInterval(() => {
+    progressStartValue++;
+
+    progressValue.textContent = `${progressStartValue}%`;
+    circularProgress.style.background = `conic-gradient(
+    violet 0deg,
+    rgb(81, 21, 247) ${(progressStartValue * 3.6)}deg,
+    rgb(81, 21, 247) ${progressStartValue * 3.6}deg,
+    rgb(240, 234, 234) ${progressStartValue * 3.6}deg
+)`;
+
+
+
+    if(progressStartValue >= Math.round(percentage2)) {
+        clearInterval(progress);
+    }
+}, speed);
+
+
+
+
         
             if (percentage > 40) {
                 // baad me karunga
             }
         }
+
         
-       
+        
+  
+        
+        
         
     
 </script>
