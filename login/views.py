@@ -16,7 +16,8 @@ def login_view(request):
             return redirect('home')
         else:
             error_message = "Invalid username or password"
-            return render(request, 'home.html', {'error_message': error_message})
+            print("Authentication failed")
+            return render(request, 'login2.html', {'error_message': error_message})
     return render(request, 'login2.html')
 
 def signup_view(request):
@@ -25,37 +26,51 @@ def signup_view(request):
         password = request.POST.get('password')
         conpass = request.POST.get('confirm_password')
         email = request.POST.get('email')
-        # Here you would typically create a new user
-        # For example:
-        # user = User.objects.create_user(username=username, password=password, email=email)
-        # user.save()
-        # return redirect('login')
+
+        # Check if passwords match
+        if password != conpass:
+            error_message = "Password and Confirm Password do not match"
+            return render(request, 'signup.html', {'error_message': error_message})
+
+        # Check if the username already exists
+        if User.objects.filter(username=username).exists():
+            error_message = "Username already exists"
+            return render(request, 'signup.html', {'error_message': error_message})
+        if User.objects.filter(email=email).exists():
+            error_message = "Email already exists"
+            return render(request, 'signup.html', {'error_message': error_message})
+
+        # Create the user after all checks
         user = User.objects.create_user(username=username, email=email)
         user.set_password(password)  # Set the password using set_password method
-        if password == conpass:
-            user.save()
-            return redirect('login')
-        else:
-            error_message = "Passwords do not match"
-            return render(request, 'signup.html', {'error_message': error_message})
-        
-       
+        user.save()
+        return render(request,'login')
     return render(request, 'signup.html')
+
+from django.core.mail import send_mail
+from django.conf import settings
 
 def forgetpass(request):
     if request.method == 'POST':
         username = request.POST.get('username')
-        # email = request.POST.get('email')
-        # Here you would typically handle the password reset logic
-        # For example, send a password reset email or redirect to a password reset page
         user = User.objects.filter(username=username).first()
         if user:
-            # Logic to send password reset email or redirect to password reset page
+            # Generate a new password or use the existing one
+            #fetch the user password
+            password = user.password
+
+            # Send the password to the user's email
+            subject = "Password Reset Request"
+            message = f"Hello {user.username},\n\nYour  password is: {password}\n\nPlease log in and change your password immediately."
+            from_email = settings.EMAIL_HOST_USER
+            recipient_list = [user.email]
+
+            send_mail(subject, message, from_email, recipient_list)
+
             return redirect('login')
         else:
             error_message = "User not found"
             return render(request, 'forgetpass.html', {'error_message': error_message})
     return render(request, 'forgetpass.html')
-
 def home_view(request):
     return render(request,'home.html')

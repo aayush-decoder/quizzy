@@ -25,7 +25,9 @@
             <input type="text" placeholder="Username" name="username" required ><br>
             <input type="password" placeholder="Password" name="password" required><br>
             <input type="submit" value="Login" ><br>
-           
+           {% if error_message %}
+                <script>alert("{{ error_message }}");</script>
+            {% endif %}
         </form>
 
         <span><a href="{% url 'forgetpass' %}">Forget Password</a></`span><br>
@@ -36,6 +38,11 @@
     </div>
 </body>
 <script>
+    //error message display
+    if('{{alert_message}}'){
+        alert('{{alert_message}}');
+    }
+    // Theme switcher script
   const themeSwitcher = document.getElementById('themeSwitcher');
   const savedTheme = localStorage.getItem('theme') || 'light';
 
