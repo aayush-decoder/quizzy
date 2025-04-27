@@ -12,7 +12,7 @@
 <body>
     <section>
        
-            <div class="quiz-box">
+            <div class="quiz-box" id="quizBox">
                 <meter id="progressBar" value="1" min="0" max="10"></meter>
                 <div class="question-box">
                     hello
@@ -27,6 +27,9 @@
             </div>
         
     </section>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     let startTime = Date.now();
 // to be changed when start btn is clicked
@@ -48,7 +51,50 @@
               displayQuestion(); 
           });
         
-        function displayQuestion() {
+       
+
+          document.addEventListener('DOMContentLoaded', function () {
+            if ('{{request.user.username}}' == '') {
+                Swal.fire({
+                    title: '{{ quiz_name|capfirst }} quiz',
+                    text: 'You must Sign Up or Log In to give this quiz.',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Sign Up',
+                    cancelButtonText: 'Log In',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                    backdrop: `
+                    rgba(0, 0, 0, 0.4)
+                    url('') 
+                    left top 
+                    no-repeat
+                `,
+                    willOpen: () => {
+                        var mainBody = document.getElementById("quizBox");
+                        mainBody.style.filter = 'blur(5px)';
+                    },
+                    buttonsStyling: true,
+                    confirmButtonColor: '#6a11cb', 
+                    cancelButtonColor: '#2575fc', 
+                    customClass: {
+                      popup: 'sweetalert-custom'
+                    }
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                      window.location.href = '{% url "signup" %}'; 
+                    } else if (result.dismiss === Swal.DismissReason.cancel) {
+                      window.location.href = '{% url "login" %}'; 
+                    }
+                  });
+              }
+        });
+
+
+
+       
+       
+          function displayQuestion() {
             const q = questions[currentQuestionIndex];
         
             $(".question-box").html(q.question);
@@ -149,7 +195,7 @@
                 
                 <div class="d-flex flex-column gap-2 mt-4">
                     <div>
-                        <button class="btn btn-gradient text-white"><i class="fas fa-list-ol"></i> See Leaderboard</button>
+                        <a href="{% url "leaderboard" quiz_name %}"><button class="btn btn-gradient text-white"><i class="fas fa-list-ol"></i> See Leaderboard</button></a>
                         <button class="btn btn-gradient text-white"><i class="fas fa-check-circle"></i> See Answers</button>
                     </div>
                     <button class="btn btn-gradient text-white"><i class="fas fa-chart-line"></i> See Full Analysis</button>
@@ -174,7 +220,6 @@ let progress = setInterval(() => {
     circularProgress.style.background = `conic-gradient(
     violet 0deg,
     rgb(81, 21, 247) ${(progressStartValue * 3.6)}deg,
-    rgb(81, 21, 247) ${progressStartValue * 3.6}deg,
     rgb(240, 234, 234) ${progressStartValue * 3.6}deg
 )`;
 
