@@ -1,6 +1,7 @@
 {% extends "base/layout.html" %}
 
 {% load static %}
+{% load custom_filters %}
 
 {% block title %}All Quizzes{% endblock %}
 
@@ -84,7 +85,7 @@
             color: #ffcc00;
         }
 
-        .quiz-stats {
+        .quiz-stats, .total-time {
             display: flex;
             justify-content: space-between;
             font-size: 14px;
@@ -137,34 +138,51 @@
             border: 2px solid rgb(247, 200, 255);
             box-shadow: 0 0 16px rgb(255, 0, 255), 0 0 16px rgb(0, 81, 255);
         }
+
+        .themed-text {
+            color: rgba(93, 0, 255, 0.81);
+        }
+        .themed-gradient-text {
+            background-image: linear-gradient(to bottom right, rgba(93, 0, 255, 0.84), rgba(183, 0, 255, 0.64));
+            background-clip: text;
+            color: transparent;
+        }
+        
     </style>
 {% endblock %}
 
 {% block content %}
 <section class="quiz-container">
-    {% for quiz, number_of_ques, attempts in quiz_data %}
+    {% for Quiz, number_of_ques, attempts in quiz_data %}
     <div class="quiz-card h-120">
-        <a href="{% url 'quiz' quiz %}" style="z-index:999;" target="_blank">
+        <a href="{% url 'quiz' Quiz.quiz_name %}" style="z-index:999;" target="_blank">
             <div class="quiz-image-wrapper">
-            <img src="../media/ancient-civilization.jpeg" alt="{{ quiz }} quiz image" class="quiz-image">
+            <img src="../media/{{ Quiz.quiz_name }}.jpeg" alt="{{ Quiz.quiz_name }} quiz image" class="quiz-image">
             <div class="quiz-overlay">
                     <button class="play-button">Start Quiz</button>
             </div>
         </div>
     </a>
         <div class="quiz-body">
-            <span class="quiz-category">Science</span>
-            <h5 class="quiz-title">{{ quiz|capfirst }} quiz</h5>
-            <p class="quiz-difficulty">
-                <i class="fas fa-star text-warning"></i>
-                <i class="fas fa-star text-warning"></i>
-                <i class="fas fa-star text-warning"></i>
-                <i class="far fa-star text-warning"></i>
-                <i class="far fa-star text-warning"></i>
-                <span class="ms-2 text-muted">Intermediate</span>
-            </p>
+            <div class="d-flex justify-content-between">
+                <span class="quiz-category">{{ Quiz.quiz_category|capfirst }}</span>
+                <span class="total-time"><i class="fas fa-stopwatch mt-1 me-1"></i> {{ Quiz.quiz_time|floor_divide:60 }} mins</span>
+            </div>
+
+            <h5 class="quiz-title">{{ Quiz.quiz_name|capfirst }} quiz</h5>
+
+            <div class="d-flex justify-content-between">
+                <p class="quiz-difficulty">
+                    <i class="fas fa-star text-warning"></i>
+                    <i class="fas fa-star text-warning"></i>
+                    <i class="fas fa-star text-warning"></i>
+                    <i class="far fa-star text-warning"></i>
+                    <i class="far fa-star text-warning"></i>
+                </p>
+                <span class="ms-2 themed-text"><i class="fa fa-puzzle-piece"></i> {{ Quiz.quiz_level|capfirst }}</span>
+            </div>
             <p class="card-text text-muted">
-                Test your knowledge about planets, stars, and the mysteries of our universe. Discover how well you know the cosmos!
+                {{ Quiz.quiz_description|truncatechars:120 }}
             </p>
             <div class="quiz-stats">
                 <span><i class="fas fa-question-circle me-2"></i> {{ number_of_ques }} Questions</span>
@@ -173,8 +191,8 @@
            
         </div>
         <div class="quiz-buttons m-1 mb-4 d-flex flex-row align-items-center gap-2 justify-content-center">
-            <a href="{% url 'quiz' quiz %}" class="quiz-button w-50 mb-2 d-block d-sm-none text-center">Start Quiz</a>
-            <a href="{% url "leaderboard" quiz %}" class="quiz-button w-50 mb-2 w-sm-100 text-center">See Leaderboard</a>
+            <a href="{% url 'quiz' Quiz.quiz_name %}" class="quiz-button w-50 mb-2 d-block d-sm-none text-center">Start Quiz</a>
+            <a href="{% url "leaderboard" Quiz.quiz_name %}" class="quiz-button w-50 mb-2 w-sm-100 text-center">See Leaderboard</a>
         </div>
         
         

@@ -23,7 +23,9 @@ from . import views
 urlpatterns = [
     path('', views.load_all_quizes, name='all_quizzes'),
     path('save-result/', views.save_quiz_result, name='save_quiz_result'),
+    path('save-rating/', views.save_user_quiz_rating, name='save_quiz_rating'),
     path('leaderboard/', views.load_leaderboard, name="load_leaderboard"),
+    path('response/<str:quiz_name>/', views.load_quiz_response, name="quiz_response"),
     path('leaderboard/<str:quiz_name>/', views.leaderboard_view, name='leaderboard'),
     path('leaderboard/<str:quiz_name>/analysis', views.leaderboard_chart, name='analysis'),
     path('<str:quiz_name>/', views.quiz, name="quiz"),

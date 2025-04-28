@@ -1,133 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Feedback Form</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-  <style>
-    body {
-      font-family: 'Orbitron', sans-serif;
-      background: linear-gradient(135deg, #6a11cb, #2575fc);
-      color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-    }
+{% extends "base/layout.html" %}
 
-    .feedback-form {
-      background-color: rgba(0, 0, 50, 0.25);
-      padding: 2rem;
-      border-radius: 20px;
-      box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
-      width: 350px;
-    }
+{% load static %}
 
-    .feedback-form h2 {
-      text-align: center;
-      margin-bottom: 1rem;
-      font-weight: 600;
-      font-size: 1.8rem;
-      letter-spacing: 1px;
-    }
-
-    .form-group {
-      margin-bottom: 1rem;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 0.4rem;
-      font-size: 0.95rem;
-    }
-
-    input[type="text"],
-    textarea,
-    select {
-      width: 100%;
-      padding: 0.6rem;
-      border: none;
-      border-radius: 10px;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 0.9rem;
-    }
-
-    input:disabled {
-      cursor: not-allowed;
-    }
-
-    textarea {
-      resize: vertical;
-      min-height: 80px;
-    }
-
-    input[disabled] {
-      background-color: #444;
-      color: #ccc;
-    }
-
-    .submit-btn {
-      display: flex;
-      justify-content:center;
-      width: 100%;
-      padding: 0.8rem;
-      background-color: #8a2be2;
-      border: none;
-      border-radius: 10px;
-      color: white;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: 0.3s ease;
-    }
-
-    .submit-btn:hover {
-      background-color: #6a11cb;
-    }
-
-    .loader {
-        border: 3px solid rgba(255, 255, 255, 0.2);
-        border-top: 3px solid white; 
-        border-radius: 50%;
-        height: .95rem;
-        aspect-ratio: 1/1;
-        animation: spin 1s linear infinite;
-      }
-  
-      @keyframes spin {
-        0% { transform: rotate(180deg); }
-        100% { transform: rotate(360deg); }
-      }
-
-      
-      
-  </style>
-</head>
-<body>
+{% block title %}Feedback Form{% endblock %}
 
 
+{% block css %}
+    <link rel="stylesheet" href="{% static "feedback.css" %}">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+{% endblock %}
+
+
+
+{% block content %}
+
+<section class="feedback-body">
   <form class="feedback-form" id="feedbackForm">
     <h2>Feedback</h2>
-
+  
     <div class="form-group">
       <label for="name">Name</label>
       <input type="text" id="name" value="{{ request.user.username }}" disabled />
     </div>
-
+  
     <div class="form-group">
       <label for="experience">How was your experience?</label>
       <textarea id="experience" placeholder="Tell us how it went..."></textarea>
     </div>
-
+  
     <div class="form-group">
       <label for="improve">What can we improve?</label>
       <textarea id="improve" placeholder="We value your suggestions..."></textarea>
     </div>
-
+  
     <div class="form-group">
       <label for="rating">Rating (1 to 5)</label>
       <select id="rating" required>
@@ -138,49 +47,48 @@
         <option value="4">4 - Very Good</option>
         <option value="5">5 - Excellent</option>
       </select>
-
+  
     </div>
-
+  
     <button type="submit" class="submit-btn">Submit Feedback</button>
   </form>
+</section>
 
 
 
-  <script>
-    const form = document.getElementById("feedbackForm");
-    const SCRIPT = "https://script.google.com/macros/s/AKfycbzrrMWKqHu3dL4SYLLf6WTx7hnMQt3_Gmhf-Lx7qTHzBhOAzUhUtcMrkAnmvfG2gq2_/exec";
-  
-    form.addEventListener("submit", async function (e) {
-      e.preventDefault();
-  
-    const name = document.getElementById('name').value; 
-    const experience = document.getElementById('experience').value;
-    const improve = document.getElementById('improve').value;
-    const rating = document.getElementById('rating').value;
+<script>
+  const form = document.getElementById("feedbackForm");
+  const SCRIPT = "https://script.google.com/macros/s/AKfycbzrrMWKqHu3dL4SYLLf6WTx7hnMQt3_Gmhf-Lx7qTHzBhOAzUhUtcMrkAnmvfG2gq2_/exec";
 
-    // loading bar to btn
-    $(".submit-btn").html("<div class='loader'></div>")
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
 
-    const queryString = `?name=${encodeURIComponent(name)}&experience=${encodeURIComponent(experience)}&improve=${encodeURIComponent(improve)}&rating=${encodeURIComponent(rating)}`;
+  const name = document.getElementById('name').value; 
+  const experience = document.getElementById('experience').value;
+  const improve = document.getElementById('improve').value;
+  const rating = document.getElementById('rating').value;
 
-    //send get req
-    fetch(`https://script.google.com/macros/s/AKfycbzg5hFvKSlP6T6Y75E-pHyO-7CxLHHMyv0WvLYzEePMdo-U-F2q8e0Tvc9XiKNxU9oV/exec${queryString}`, {
-        method: "GET",
-    })
-    .then(response => response.text())
-    .then(data => {
-        console.log("Success:", data);
-        $(".submit-btn").html("<div class='circle-check'><i class='fas fa-check'></i></div> &nbsp;Feedback Submited");
-        $(".submit-btn").css("background-color", "#4CAF50")
-        $(".circle-check").css("animation", "spin .5s ease-out");
-    })
-    .catch((error) => {
-        console.error("Error:", error);
-        alert('There was an issue with the submission.');
-    });
-    });
-  </script>
+  // loading bar to btn
+  $(".submit-btn").html("<div class='loader'></div>")
 
+  const queryString = `?name=${encodeURIComponent(name)}&experience=${encodeURIComponent(experience)}&improve=${encodeURIComponent(improve)}&rating=${encodeURIComponent(rating)}`;
 
-</body>
-</html>
+  //send get req
+  fetch(`https://script.google.com/macros/s/AKfycbzg5hFvKSlP6T6Y75E-pHyO-7CxLHHMyv0WvLYzEePMdo-U-F2q8e0Tvc9XiKNxU9oV/exec${queryString}`, {
+      method: "GET",
+  })
+  .then(response => response.text())
+  .then(data => {
+      console.log("Success:", data);
+      $(".submit-btn").html("<div class='circle-check'><i class='fas fa-check'></i></div> &nbsp;Feedback Submited");
+      $(".submit-btn").css("background-color", "#4CAF50")
+      $(".circle-check").css("animation", "spin .5s ease-out");
+  })
+  .catch((error) => {
+      console.error("Error:", error);
+      alert('There was an issue with the submission.');
+  });
+  });
+</script>
+
+{% endblock %}

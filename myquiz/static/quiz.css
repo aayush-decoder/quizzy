@@ -37,12 +37,12 @@ section {
     transform: translate(-50%, -50%);
     border: 1px solid rgb(202, 202, 202);
     border-radius: 12px;
-    padding: .75rem 1rem;
+    padding: .25rem 1rem;
     background-color: var(--quiz-bg-color);
 }
 
 .result-box {
-    height: 100vh;
+    height: 98vh;
 }
 
 .animated-entry{
@@ -68,10 +68,11 @@ section {
     color: transparent;
 }
 
-meter {
+meter#progressBar {
     width: calc(100% - 16px);
     position: absolute;
     top: -4px;
+    background-color: #eee;
 }
 
 meter {
@@ -95,6 +96,17 @@ meter {
     background: linear-gradient(to right, #6c63ff, #8a74ff);
     border-radius: 10px;
   }
+
+.timerBox {
+    font-family: 'Nunito Sans';
+    margin-bottom: .5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 10px;
+    width: 100%; 
+}
+
   
 
 .options-box {
@@ -218,11 +230,11 @@ meter {
     .option {
         font-size: 1rem;
         padding: 0.75rem 0.5rem;
-        width: 100%;
+        width: 95%;
     }
 
     .Btn {
-        width: 100%;
+        width: 90%;
         font-size: 1rem;
         height: 2.5rem;
         margin: 1.5rem 0;
@@ -232,6 +244,17 @@ meter {
         font-size: 1rem;
         text-align: center;
     }
+}
+
+
+.timerBox {
+    color: #555;
+}
+i {
+    margin-right: .25rem;
+}
+#timeSpan {
+    margin-right: .1rem;
 }
 
 @media screen and (max-width: 480px) {

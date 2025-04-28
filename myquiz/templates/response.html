@@ -1,0 +1,148 @@
+{% extends "base/layout.html" %}
+
+{% load static %}
+{% load custom_filters %}
+
+{% block title %}Your Quiz Responses{% endblock %}
+
+{% block css %}
+<style>
+    .mainResponseBox {
+        font-family: Poppins;
+    }
+    .question-card {
+        border: 2px solid #ddd;
+        border-radius: 15px;
+        padding: 20px;
+        margin-bottom: 20px;
+        background: #f9f9f9;
+        box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+        transition: 0.3s;
+    }
+    .question-card:hover {
+        transform: scale(1.01);
+        transition: .5s;
+    }
+    .correct {
+        background-color: #d4edda;
+        border-color: #28a745;
+    }
+    .wrong {
+        background-color: #f8d7da;
+        border-color: #dc3545;
+    }
+    .skipped {
+        background-color: #fff3cd;
+        border-color: #ffc107;
+    }
+    .option {
+        margin: 5px 0;
+    }
+    .option.correct-answer {
+        font-weight: bold;
+        color: green;
+    }
+    .option.user-answer {
+        font-weight: bold;
+        color: blue;
+    }
+    .option.skipped-answer {
+        font-weight: bold;
+        color: orange;
+    }
+    .remarkBox {
+        font-family: "Sriracha"
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5 mainResponseBox">
+    <h1 class="text-center mb-4">📝 Your Responses for {{ quiz_name|capfirst }} quiz</h1>
+    <div id="responseArea"></div>
+</div>
+
+<script>
+    let questions = [];
+let userResponses = [];
+
+fetch("{% static 'questions/data.json' %}")
+.then(res => res.json())
+.then(data => {
+    const quizName = '{{ quiz_name }}';
+    if (!data.hasOwnProperty(quizName)) {
+        console.error("Quiz name not found in data:", quizName);
+        return;
+    }
+
+    questions = data[quizName];
+    if (!Array.isArray(questions)) {
+        console.error("Questions data is not an array:", questions);
+        return;
+    }
+
+    try {
+        userResponses = JSON.parse('{{ user_response_json|safe }}'); 
+    } catch (e) {
+        console.error("Error parsing user responses:", e);
+        return;
+    }
+
+    displayResponses();
+});
+
+function displayResponses() {
+    const container = document.getElementById('responseArea');
+    if (!questions || questions.length === 0) {
+        container.innerHTML = "<p>No questions found for this quiz.</p>";
+        return;
+    }
+    if (!userResponses || userResponses.length === 0) {
+        container.innerHTML = "<p>No user responses found.</p>";
+        return;
+    }
+
+    questions.forEach((q, idx) => {
+        if (!q) return;  // skip null questions
+
+        var userAnswer = userResponses["que"+Number(idx+1)];
+        var correctAnswer = q['key'];
+
+        let card = document.createElement('div');
+        card.classList.add('question-card');
+
+        let remark = '';
+        if (userAnswer === 0) {
+            card.classList.add('skipped');
+            remark = `<div class="remarkBox"><strong>Remark:</strong> ⏭️ Skipped</div>`;
+        } else if (userAnswer === correctAnswer) {
+            card.classList.add('correct');
+            remark = `<div class="remarkBox"><strong>Remark:</strong> ✅ Correct</div>`;
+        } else {
+            card.classList.add('wrong');
+            remark = `<div class="remarkBox"><strong>Remark:</strong> ❌ Wrong</div>`;
+        }
+        console.log(userAnswer)
+        console.log(correctAnswer)
+
+        let questionHTML = `<h5>Q${idx+1}: ${q['question']}</h5>`;
+
+        let optionsHTML = '';
+        for (let i = 1; i <= 4; i++) {
+            let extraClass = '';
+
+            if (i === correctAnswer) extraClass += ' correct-answer';
+            if (i === userAnswer && userAnswer !== 0) extraClass += ' user-answer';
+            if (userAnswer === 0 && i === correctAnswer) extraClass += ' skipped-answer';
+
+            optionsHTML += `<div class="option${extraClass}">${i}. ${q['option'+i]}</div>`;
+        }
+
+        card.innerHTML = questionHTML + remark + optionsHTML;
+        container.appendChild(card);
+    });
+}
+
+</script>
+{% endblock %}

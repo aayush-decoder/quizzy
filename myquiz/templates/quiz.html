@@ -7,13 +7,22 @@
     <meta name="csrf-token" content="{{ csrf_token }}">
     <title>{{ quiz_name|capfirst }} Quiz</title>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static "quiz.css" %}">
 </head>
 <body>
     <section>
        
             <div class="quiz-box" id="quizBox">
-                <meter id="progressBar" value="1" min="0" max="10"></meter>
+                <meter id="progressBar" value="1" min="1" max="10"></meter>
+                <div class="timerBox text-muted">
+                    <span>
+                        <span id="currentQuestion"></span> of <span id="totalQuestions">10</span>
+                    </span>
+                    <span class="me-2">
+                        <i class="fas fa-stopwatch mt-1 me-1"></i><span id="timeSpan">{{quiz_time}}</span>s
+                    </span>
+                </div>                
                 <div class="question-box">
                     hello
                 </div>
@@ -23,7 +32,7 @@
                     <div class="option" id="op3" onclick="optionSelected(this.id);">op3</div>
                     <div class="option" id="op4" onclick="optionSelected(this.id);">op4</div>
                 </div>
-                <button class="btn Btn next-btn" onclick="nextQuestion()">Next</button>
+                <button class="btn Btn next-btn" onclick="nextQuestion()">Skip</button>
             </div>
         
     </section>
@@ -31,7 +40,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    let startTime = Date.now();
+        let startTime = Date.now();
+        let timer = {{ quiz_time }};
 // to be changed when start btn is clicked
         let questions = [];
         let response = {};
@@ -40,7 +50,7 @@
 
         const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
 
-        $(".quiz-box").addClass("animated-entry")
+        $(".quiz-box").addClass("animated-entry");
 
         
         // loading qsns from json file
@@ -48,12 +58,22 @@
           .then(res => res.json())
           .then(data => {
               questions = data['{{ quiz_name }}'];
+
+              $("#totalQuestions").html(questions.length);
+              $("#progressBar").attr("max", questions.length);
               displayQuestion(); 
           });
+
+
+          var TIMER = setInterval(() => {
+            timer--;
+            document.getElementById("timeSpan").innerHTML = timer;
+          }, 1000)
         
        
 
           document.addEventListener('DOMContentLoaded', function () {
+            setUp();
             if ('{{request.user.username}}' == '') {
                 Swal.fire({
                     title: '{{ quiz_name|capfirst }} quiz',
@@ -91,10 +111,15 @@
         });
 
 
-
+        function setUp() {
+            var progressBar = document.getElementById("progressBar");
+            progressBar.max = questions.length;
+            
+            $("#currentQuestion").html(1);
+        }
        
        
-          function displayQuestion() {
+        function displayQuestion() {
             const q = questions[currentQuestionIndex];
         
             $(".question-box").html(q.question);
@@ -105,26 +130,46 @@
         
             $('.option').removeClass("selected-option");
         }
+
+        function updateProgressBar() {
+            var progressBar = document.getElementById("progressBar");
+            progressBar.value = parseInt(progressBar.value) + 1;
+        }
         
         function optionSelected(optionId) {
             $('.option').removeClass("selected-option");
             $('#' + optionId).addClass("selected-option");
         
             response['que' + (currentQuestionIndex + 1)] = parseInt(optionId.slice(2));
+            $('.next-btn').text("Next");
             console.log(response);
         }
+
+        function fillSkippedResponse() {
+            if (parseInt(response['que' + (currentQuestionIndex)]) < 5) {}
+            else {
+                response['que' + currentQuestionIndex] = 0;
+            }
+        }
+
         
         function nextQuestion() {
             currentQuestionIndex++;
-        
+            $("#currentQuestion").html(currentQuestionIndex+1);
+
+            
+            fillSkippedResponse();
+
             if (currentQuestionIndex === questions.length) {
                 showScore();
                 return;
             }
         
             displayQuestion();
+            updateProgressBar();
+            
         
-            $('.next-btn').text(currentQuestionIndex === questions.length - 1 ? "Finish" : "Next");
+            $('.next-btn').text(currentQuestionIndex === questions.length - 1 ? "Finish" : "Skip");
         }
         
         function showScore() {
@@ -137,6 +182,7 @@
             }
         
             const endTime = Date.now();
+            clearInterval(TIMER);
             const timeTakenSeconds = ((endTime - startTime) / 1000).toFixed(2);
         
             const percentage = (score / questions.length) * 100;
@@ -164,6 +210,8 @@
                 quiz_name: quizName,
                 score: score,
                 time_taken: timeTakenSeconds,
+                response: JSON.stringify(response),
+                questions: questions,
                 csrfmiddlewaretoken: '{{ csrf_token }}'
             }).done(function(responses) {
                 console.log("Saved to DB:", responses);
@@ -196,9 +244,12 @@
                 <div class="d-flex flex-column gap-2 mt-4">
                     <div>
                         <a href="{% url "leaderboard" quiz_name %}"><button class="btn btn-gradient text-white"><i class="fas fa-list-ol"></i> See Leaderboard</button></a>
-                        <button class="btn btn-gradient text-white"><i class="fas fa-check-circle"></i> See Answers</button>
+                        <a href="{% url 'quiz_response' quiz_name %}"><button class="btn btn-gradient text-white"><i class="fas fa-check-circle"></i> See Answers</button></a>
                     </div>
-                    <button class="btn btn-gradient text-white"><i class="fas fa-chart-line"></i> See Full Analysis</button>
+                    <!--button class="btn btn-gradient text-white"><i class="fas fa-chart-line"></i> See Full Analysis</button-->
+                    <a href="{% url 'quiz' quiz_name %}"><button class="btn btn-gradient text-white"><i class="fas fa-redo"></i>
+ Re-attempt quiz</button></a>
+                
                 </div>
             </div>
 `;

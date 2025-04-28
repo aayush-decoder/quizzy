@@ -2,6 +2,9 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.shortcuts import redirect
 from django.contrib.auth.models import User
+from myquiz.models import QuizResult, Quiz
+
+from django.db.models import Avg
 
 # Create your views here.
 def login_view(request):
@@ -72,5 +75,23 @@ def forgetpass(request):
             error_message = "User not found"
             return render(request, 'forgetpass.html', {'error_message': error_message})
     return render(request, 'forgetpass.html')
+
+
+
+
+
+
 def home_view(request):
-    return render(request,'home.html')
+    # Only select records where rating_by_user > 0
+    results = QuizResult.objects.filter(rating_by_user__gt=0)
+    quiz_names = results.values_list('quiz_name', flat=True).distinct()
+
+    avg_rating = {}
+    for quiz_name in quiz_names:
+        average = results.filter(quiz_name=quiz_name).aggregate(avg=Avg('rating_by_user'))['avg']
+        if average:  # Now we don't need to check >0 again, as 0-ratings are already excluded
+            avg_rating[quiz_name] = round(average, 2)
+
+    return render(request, 'home.html', {
+        'avg_rating': avg_rating
+    })

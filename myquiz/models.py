@@ -21,7 +21,7 @@ class QuizResult(models.Model):
 class Quiz(models.Model):
     LEVEL_CHOICES = [
         ('easy', 'Easy'),
-        ('medium', 'Medium'),
+        ('moderate', 'Moderate'),
         ('hard', 'Hard'),
     ]
 
@@ -31,7 +31,7 @@ class Quiz(models.Model):
         ('history', 'History'),
         ('sports', 'Sports'),
         ('technology', 'Technology'),
-        ('gk', 'General Knowledge'),
+        ('general knowledge', 'General Knowledge'),
     ]
 
     quiz_name = models.CharField(max_length=100)

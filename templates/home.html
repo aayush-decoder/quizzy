@@ -14,7 +14,6 @@
 {% block content %}
 
 
-    <!-- Hero Section -->
     <section class="hero-section">
         <div class="container">
             <div class="row align-items-center">
@@ -25,10 +24,6 @@
                         <i class="fas fa-play me-2"></i>
                         Start Quiz
                     </button></a>
-                    <button class="btn btn-outline-light btn-lg">
-                        <i class="fas fa-plus me-2"></i>
-                        Create Quiz
-                    </button>
                 </div>
                 <div class="col-lg-6 mt-5 mt-lg-0 text-center">
                     <img src= "../media/home 4.jpeg" alt="Quiz illustration" class="hero-image">
@@ -37,7 +32,6 @@
         </div>
     </section>
 
-    <!-- Features Section -->
     <section class="py-5">
         <div class="container">
             <div class="row text-center mb-5">
@@ -72,7 +66,6 @@
         </div>
     </section>
 
-    <!-- Popular Quizzes Section -->
     <section class="py-5" id="quizSection">
         <div class="container">
             <div class="d-flex justify-content-between align-items-center mb-4">
@@ -80,7 +73,6 @@
                 <a href="{% url 'all_quizzes' %}" class="btn btn-outline-primary">View All</a>
             </div>
             <div class="row g-4">
-                <!-- Quiz Card 1 -->
                 <div class="col-md-6 col-lg-3">
                     <div class="quiz-card card h-100">
                         <div class="quiz-image-wrapper">
@@ -111,7 +103,7 @@
                     </div>
                 </div>
 
-                <!-- Quiz Card 2 -->
+               
                 <div class="col-md-6 col-lg-3">
                     <div class="quiz-card card h-100">
                         <div class="quiz-image-wrapper">
@@ -131,9 +123,9 @@
                                 <i class="fas fa-star text-warning"></i>
                                 <i class="fas fa-star text-warning"></i>
                                 <i class="far fa-star text-warning"></i>
-                                <span class="ms-2">Advanced</span>
+                                <span class="ms-2">{{ avg_rating.sample }}</span>
                             </p>
-                            <p class="card-text text-muted">Explore the wonders of ancient Egypt, Greece, Rome, and more civilizations.</p>
+                            <p class="card-text text-muted">Explore the wonders of ancient Egypt, Greece, Rome, and more civilizations. &nbsp;&nbsp;&nbsp;&nbsp;</p>
                             <div class="quiz-stats">
                                 <span><i class="fas fa-question-circle me-2"></i>25 Questions</span>
                                 <span><i class="fas fa-users me-2"></i>1.8k Attempts</span>
@@ -142,7 +134,7 @@
                     </div>
                 </div>
 
-                <!-- Quiz Card 3 -->
+                
                 <div class="col-md-6 col-lg-3">
                     <div class="quiz-card card h-100">
                         <div class="quiz-image-wrapper">
@@ -173,7 +165,7 @@
                     </div>
                 </div>
 
-                <!-- Quiz Card 4 -->
+              
                 <div class="col-md-6 col-lg-3">
                     <div class="quiz-card card h-100">
                         <div class="quiz-image-wrapper">
@@ -206,7 +198,9 @@
         </div>
     </section>
 
-    <!-- Categories Section -->
+
+
+
     <section class="py-5 bg-light">
         <div class="container">
             <div class="text-center mb-5">
@@ -284,54 +278,17 @@
         </div>
     </section>
 
-    <!-- CTA Section -->
+
     
 
-    <!-- Testimonials Section -->
+  
     <section class="py-5">
         <div class="container">
             <div class="text-center mb-5">
                 <h2 class="fw-bold">What Our Users Say</h2>
                 <p class="text-muted">Join thousands of satisfied quiz enthusiasts</p>
             </div>
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="testimonial-card">
-                        <p class="testimonial-quote">"Quick QuizMaster has revolutionized how I study for exams. The variety of topics and difficulty levels keeps me engaged while learning."</p>
-                        <div class="d-flex align-items-center">
-                            <img src="2.jpg" alt="User avatar" class="testimonial-avatar">
-                            <div>
-                                <p class="testimonial-name">Sarah Johnson</p>
-                                <p class="testimonial-role">University Student</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="testimonial-card">
-                        <p class="testimonial-quote">"I use Quick QuizMaster to create fun trivia sessions for my classroom. My students love competing and it makes learning more interactive."</p>
-                        <div class="d-flex align-items-center">
-                            <img src="1.jpg" alt="User avatar" class="testimonial-avatar">
-                            <div>
-                                <p class="testimonial-name">Michael Rodriguez</p>
-                                <p class="testimonial-role">High School Teacher</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="testimonial-card">
-                        <p class="testimonial-quote">"The leaderboard feature adds a competitive edge that keeps me coming back. I've significantly improved my knowledge in various fields."</p>
-                        <div class="d-flex align-items-center">
-                            <img src="3.jpg" alt="User avatar" class="testimonial-avatar">
-                            <div>
-                                <p class="testimonial-name">Emma Thompson</p>
-                                <p class="testimonial-role">Quiz Enthusiast</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div class="row g-4" id="testimonialArea"></div>
         </div>
     </section>
 
@@ -359,7 +316,7 @@
                 </div>
                 <div class="col-6 col-md-3 col-lg-2">
                     <h5 class="footer-heading">Support</h5>
-                    <a href="#" class="footer-link">Feedback</a>
+                    <a href="{% url 'feedback' %}" class="footer-link">Feedback</a>
                 </div>
             </div>
             <div class="copyright">
@@ -368,5 +325,50 @@
         </div>
     </footer>
     
+    <script>
+        fetch("https://script.google.com/macros/s/AKfycbxk7bQY8VwKGGgPg-nHHElBRE7qPCPetjSeYjc_-hA8fok2h9YzkDnmELXzp2jW5buf/exec?task=fetch")
+        .then(res => res.json())
+        .then(data => {
+            // Filter valid ratings (rating > 0)
+            let validFeedbacks = data.filter(fb => Number(fb.rating) > 0);
+    
+            // Sort first by rating (desc), then by experience length (desc)
+            validFeedbacks.sort((a, b) => {
+                if (Number(b.rating) !== Number(a.rating)) {
+                    return Number(b.rating) - Number(a.rating); // Higher rating first
+                } else {
+                    return b.experience.length - a.experience.length; // Longer experience first
+                }
+            });
+    
+            // Take top 3
+            validFeedbacks = validFeedbacks.slice(0, 3);
+    
+            const container = document.getElementById('testimonialArea');
+            container.innerHTML = '';
+    
+            validFeedbacks.forEach(fb => {
+                const randomUsername = encodeURIComponent(fb.name.trim().split(' ')[0] || 'User');
+                const card = `
+                    <div class="col-md-4">
+                        <div class="testimonial-card">
+                            <p class="testimonial-quote">"${fb.experience}"</p>
+                            <div class="d-flex align-items-center">
+                                <img src="https://avatar.iran.liara.run/public/boy?username=${fb.name}" alt="User avatar" class="testimonial-avatar">
+                                <div>
+                                    <p class="testimonial-name">${fb.name || 'Anonymous'}</p>
+                                    <p class="testimonial-role">Rated: ${fb.rating}⭐</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += card;
+            });
+        })
+        .catch(err => {
+            console.error('Failed to load testimonials:', err);
+        });
+    </script>
 
 {% endblock %}
