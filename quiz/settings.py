@@ -136,3 +136,5 @@ EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False  # Set to True if your email provider requires SSL
 EMAIL_HOST_USER = 'u24ai090@aid.svnit.ac.in'  # Your email address
 EMAIL_HOST_PASSWORD = 'shravya@28'  # Your email password
+# settings.py
+LOGOUT_REDIRECT_URL = 'login'  # ya jo tumhara login page ka URL name hai

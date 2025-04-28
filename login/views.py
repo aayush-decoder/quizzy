@@ -26,25 +26,18 @@ def signup_view(request):
         password = request.POST.get('password')
         conpass = request.POST.get('confirm_password')
         email = request.POST.get('email')
-
         # Check if passwords match
         if password != conpass:
             error_message = "Password and Confirm Password do not match"
             return render(request, 'signup.html', {'error_message': error_message})
-
-        # Check if the username already exists
         if User.objects.filter(username=username).exists():
             error_message = "Username already exists"
             return render(request, 'signup.html', {'error_message': error_message})
-        if User.objects.filter(email=email).exists():
-            error_message = "Email already exists"
-            return render(request, 'signup.html', {'error_message': error_message})
-
         # Create the user after all checks
         user = User.objects.create_user(username=username, email=email)
         user.set_password(password)  # Set the password using set_password method
         user.save()
-        return render(request,'login')
+        return render(request,'login2.html')
     return render(request, 'signup.html')
 
 from django.core.mail import send_mail
