@@ -25,6 +25,7 @@ urlpatterns = [
     path('', include('login.urls')),
     path('quiz/', include('myquiz.urls'), name="quiz"),
     path('logout/', views.logout_view, name='logout'),
+    path('about/', views.about_view, name='about'),
     path('feedback/', views.feedback_form_view, name="feedback")
 
 

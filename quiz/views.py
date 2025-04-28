@@ -18,3 +18,6 @@ def admin(request):
 def logout_view(request):
     logout(request)
     return redirect('home')
+
+def about_view(request):
+    return render(request, "aboutus.html")
