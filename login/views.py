@@ -29,18 +29,25 @@ def signup_view(request):
         password = request.POST.get('password')
         conpass = request.POST.get('confirm_password')
         email = request.POST.get('email')
+
         # Check if passwords match
         if password != conpass:
             error_message = "Password and Confirm Password do not match"
             return render(request, 'signup.html', {'error_message': error_message})
+
+        # Check if the username already exists
         if User.objects.filter(username=username).exists():
             error_message = "Username already exists"
             return render(request, 'signup.html', {'error_message': error_message})
+        if User.objects.filter(email=email).exists():
+            error_message = "Email already exists"
+            return render(request, 'signup.html', {'error_message': error_message})
+
         # Create the user after all checks
         user = User.objects.create_user(username=username, email=email)
         user.set_password(password)  # Set the password using set_password method
         user.save()
-        return render(request,'login2.html')
+        return render(request,'login')
     return render(request, 'signup.html')
 
 from django.core.mail import send_mail
@@ -75,16 +82,11 @@ def forgetpass(request):
 
 
 def home_view(request):
-    # Only select records where rating_by_user > 0
-    results = QuizResult.objects.filter(rating_by_user__gt=0)
-    quiz_names = results.values_list('quiz_name', flat=True).distinct()
+    # avg_rating = QuizResult.objects.aggregate(avg_rating=Avg('rating_by_user'))['avg_rating'] or 0
 
-    avg_rating = {}
-    for quiz_name in quiz_names:
-        average = results.filter(quiz_name=quiz_name).aggregate(avg=Avg('rating_by_user'))['avg']
-        if average:  # Now we don't need to check >0 again, as 0-ratings are already excluded
-            avg_rating[quiz_name] = round(average, 2)
+    # context = {
+    #     'avg_rating': round(avg_rating, 1), 
+    # }
+    # print(avg_rating)
 
-    return render(request, 'home.html', {
-        'avg_rating': avg_rating
-    })
+    return render(request, 'home.html')
